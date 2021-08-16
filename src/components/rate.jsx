@@ -2,12 +2,11 @@ import style from './rate.module.css';
 
 export default function rate({rating}) {
 
-  const array = Array.of(1,2,3,4,5);
-
   return (
     <div>
       {
-        array.map((rate, idx) => {
+        [...Array(5)].map((_, idx) => {
+          //TODO Добавить className библиотеку
           return <div key={idx} className={idx < rating ? style.red : style.white}>*</div>
         })
       }

@@ -1,5 +1,6 @@
 import Rate from './rate';
 
+//TODO Сделать еще 1 компонент Review
 export default function reviews(props) {
   return (
     <div>
