@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import Menu from './menu';
 import Navigation from './navigation';
+import Restaurant from './restaurant';
 
-export default function Restaurants(props) {
+export default function Restaurants({restaurants}) {
 
-  const [currentRest, setCurrentRest] = useState(props.restaurants[0]);
+  const [currentRest, setCurrentRest] = useState(restaurants[0]);
 
   return (
     <div>
       <Navigation
-        restaurants={props.restaurants}
+        restaurants={restaurants}
         onRestaurantClick={(id) => setCurrentRest(id)}
       />
-      <Menu menu={currentRest.menu} />
+      <Restaurant {...currentRest}/>
     </div>
   )
 }
