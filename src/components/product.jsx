@@ -1,8 +1,8 @@
-import UseAmount from "../hooks/useAmount"
+import Counter from '../hocs/counter';
 
-export default function product(props) {
+function product(props) {
 
-  const {amount, decrement, increment} = UseAmount(0);
+  const { amount, increment, decrement } = props;
 
   return (
     <div>
@@ -14,3 +14,6 @@ export default function product(props) {
     </div>
   )
 }
+
+export default Counter(product)
+
