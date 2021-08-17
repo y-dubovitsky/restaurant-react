@@ -1,18 +1,23 @@
 import Counter from '../hocs/counter';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 function Product(props) {
 
-  const { product, amount, increment, decrement } = props;
+  const { product, amount, increment, decrement, fetchData } = props;
+
+  useEffect(() => {
+    fetchData && fetchData(product.id);
+  }, [])
 
   return (
-    <div>
+    <div data-test="product">
       <p>{product.name}</p>
       <p>${product.price}</p>
       <hr />
       <p>{product.ingredients.join(", ")}</p>
-      <p>Amount: {amount}</p>
-      <button onClick={decrement}>-</button>
+      <p data-test="product-amount">Amount: {amount}</p>
+      <button data-test="product-decrement" onClick={decrement}>-</button>
       <button onClick={increment}>+</button>
     </div>
   )
