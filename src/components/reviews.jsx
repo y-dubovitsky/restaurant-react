@@ -1,11 +1,11 @@
 import Rate from './rate';
 
 //TODO Сделать еще 1 компонент Review
-export default function reviews(props) {
+export default function Reviews({reviews}) {
   return (
-    <div>
+    <div data-test="reviews">
       {
-        props.reviews.map(review => {
+        reviews.map(review => {
           return (
             <div key={review.id}>
               <h4>{review.user}</h4>
