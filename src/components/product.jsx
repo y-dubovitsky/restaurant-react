@@ -1,6 +1,7 @@
-import Counter from '../hocs/counter';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import { increment, decrement } from '../redux/reducer/action';
 
 function Product(props) {
 
@@ -33,6 +34,15 @@ Product.propTypes = {
   decrement: PropTypes.func.isRequired,
   increment: PropTypes.func.isRequired
 }
+// Важно, передается state и props самого объекта Product!
+const mapStateToProps = (state, props) => ({
+  amount: state.order[props.product.id] || 0
+});
 
-export default Counter(Product);
+const mapDispatchToProps = (dispatch, props) => ({
+  increment: () => dispatch(increment(props.product.id)),
+  decrement: () => dispatch(decrement(props.product.id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
 
