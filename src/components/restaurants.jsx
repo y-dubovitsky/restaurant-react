@@ -1,13 +1,16 @@
+import { connect } from 'react-redux';
 import { useState } from 'react';
 import Navigation from './navigation';
 import Restaurant from './restaurant';
+import Basket from './basket';
 
-export default function Restaurants({restaurants}) {
+function Restaurants({restaurants}) {
 
   const [currentRest, setCurrentRest] = useState(restaurants[0]);
 
   return (
     <div>
+      <Basket/>
       <Navigation
         restaurants={restaurants}
         onRestaurantClick={(id) => setCurrentRest(id)}
@@ -16,3 +19,11 @@ export default function Restaurants({restaurants}) {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    restaurants: state.restaurants
+  }
+}
+
+export default connect(mapStateToProps)(Restaurants);

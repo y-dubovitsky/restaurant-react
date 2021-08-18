@@ -1,4 +1,4 @@
-import { INCREMENT, DECREMENT } from "./constants";
+import { INCREMENT, DECREMENT, REMOVE } from "../constants/constants";
 
 export default (state = 0, action) => {
 
@@ -16,6 +16,14 @@ export default (state = 0, action) => {
       return {
         ...state,
         [id]: state[id] > 0 ? state[id] - 1 : 0
+      }
+    }
+    case REMOVE: {
+      // const filtered = Object.entries(state).reduce((acc, [ k, v ]) => k !== id ? { ...acc, [k]: v } : acc, {})
+
+      return {
+        ...state,
+        [id]: 0
       }
     }
     default: {
