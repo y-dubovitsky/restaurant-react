@@ -1,9 +1,7 @@
-import { restaurants as defaultRestaurant} from '../../fixtures';
+import { normalizedRestaurants as defaultRestaurant } from '../../fixtures';
 
 export default (restaurants = defaultRestaurant, action) => {
   switch (action.type) {
-    default: {
-      return restaurants
-    }
+    default: return restaurants
   }
 }

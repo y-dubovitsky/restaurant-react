@@ -5,7 +5,7 @@ import { increment, decrement } from '../redux/actions/action';
 
 function Product(props) {
 
-  const { product, amount, increment, decrement, fetchData } = props;
+  const { id, product, amount, increment, decrement, fetchData } = props;
 
   useEffect(() => {
     fetchData && fetchData(product.id);
@@ -13,6 +13,7 @@ function Product(props) {
 
   return (
     <div data-test="product">
+      {console.log(product)}
       <p>{product.name}</p>
       <p>${product.price}</p>
       <hr />
@@ -36,12 +37,13 @@ Product.propTypes = {
 }
 // Важно, передается state и props самого объекта Product!
 const mapStateToProps = (state, props) => ({
-  amount: state.order[props.product.id] || 0
+  product: state.products.find(product => product.id === props.id),
+  amount: state.order[props.id] || 0
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  increment: () => dispatch(increment(props.product.id)),
-  decrement: () => dispatch(decrement(props.product.id))
+  increment: () => dispatch(increment(props.id)),
+  decrement: () => dispatch(decrement(props.id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

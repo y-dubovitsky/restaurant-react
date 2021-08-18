@@ -17,9 +17,11 @@ class Menu extends Component {
 
     return (
       <div>
-        {menu.map((product) => {
-          return <Product key={product.id} product={product} />
-        })}
+        {
+          menu.map((id) => {
+            return <Product key={id} id={id} />
+          })
+        }
       </div>
     )
   }

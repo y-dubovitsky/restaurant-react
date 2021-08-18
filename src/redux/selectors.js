@@ -1,12 +1,7 @@
 import { createSelector } from 'reselect';
 
-const restaurantSelector = state => state.restaurants;
 const orderSelector = state => state.order;
-
-// Если изменений в restaurantSelector не будет, то пересчитываться ничего не будет
-const productsSelector = createSelector([restaurantSelector], (restaurants) => {
-  return restaurants.flatMap((restaurant) => restaurant.menu);
-});
+const productsSelector = state => state.products;
 
 //TODO Оптимизировать этот метод!
 export const orderedProductsSelector = createSelector(
