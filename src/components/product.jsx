@@ -13,7 +13,6 @@ function Product(props) {
 
   return (
     <div data-test="product">
-      {console.log(product)}
       <p>{product.name}</p>
       <p>${product.price}</p>
       <hr />
@@ -37,7 +36,7 @@ Product.propTypes = {
 }
 // Важно, передается state и props самого объекта Product!
 const mapStateToProps = (state, props) => ({
-  product: state.products.find(product => product.id === props.id),
+  product: state.products[props.id],
   amount: state.order[props.id] || 0
 });
 
