@@ -1,6 +1,6 @@
 import { INCREMENT, DECREMENT, REMOVE } from "../constants/constants";
 
-export default (state = 0, action) => {
+export default (state = {}, action) => {
 
   const { type, id } = action;
 
