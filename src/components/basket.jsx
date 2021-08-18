@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import BasketItem from "./basketItem";
+import {orderedProductsSelector, totalOrderPriceSelector} from '../redux/selectors';
 
 function Basket({ products, totalOrderCost }) {
 
@@ -19,24 +20,9 @@ function Basket({ products, totalOrderCost }) {
 // Важно, передается state и props самого объекта Product!
 const mapStateToProps = (state) => {
 
-  const { order, restaurants } = state;
-
-  const products = restaurants.flatMap((restaurant) => restaurant.menu);
-
-  const orderIds = Object.keys(order);
-  const productArray = Object.keys(products).map(key => products[key]);
-  const orderedProducts = productArray.filter(product => orderIds.includes(product.id)).map(product => {
-    return {
-      ...product,
-      amount: order[product.id]
-    }
-  });
-
-  const totalOrderCost = orderedProducts.reduce((acc, {amount, price}) => acc + amount * price, 0);
-
   return {
-    products: orderedProducts,
-    totalOrderCost: totalOrderCost
+    products: orderedProductsSelector(state),
+    totalOrderCost: totalOrderPriceSelector(state)
   }
 }
 
