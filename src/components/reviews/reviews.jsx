@@ -1,13 +1,16 @@
 import Review from './review/review';
 
-export default function Reviews({reviewsIds}) {
+//TODO Может убрать этот компонент?
+function Reviews({ reviews }) {
   return (
     <div data-test="reviews">
       {
-        reviewsIds.map(id => (
-          <Review key={id} id={id}/>
-        ))
+        reviews.map(review => {
+          return <Review key={review.id} review={review} />
+        })
       }
     </div>
   )
 }
+
+export default Reviews;

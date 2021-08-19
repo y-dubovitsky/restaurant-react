@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import {restaurantListSelector} from '../../redux/selectors';
 
 function Navigation({ restaurants, onRestaurantClick }) {
   return (
@@ -19,8 +20,7 @@ function Navigation({ restaurants, onRestaurantClick }) {
 
 const mapStateToProps = state => (
   {
-    //TODO Улучшить это
-    restaurants: Object.values(state.restaurants)
+    restaurants: restaurantListSelector(state)
   }
 )
 

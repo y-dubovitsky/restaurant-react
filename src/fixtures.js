@@ -260,13 +260,13 @@ export const normalizedReviews = [
     id: '5909796d-5030-4e36-adec-68b8f9ec2d96',
     userId: 'a304959a-76c0-4b34-954a-b38dbf310360',
     text: 'Not bad',
-    rating: 5,
+    rating: 1,
   },
   {
     id: '429dea85-11dd-4054-a31e-c60c92e17255',
     userId: 'dfb982e9-b432-4b7d-aec6-7f6ff2e6af54',
     text: 'No burgers',
-    rating: 3,
+    rating: 1,
   },
   {
     id: '53b642d7-5e86-4717-a466-0640a1dee076',

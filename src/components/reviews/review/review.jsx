@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
+import { userByIdSelector } from '../../../redux/selectors';
 
 import Rate from '../../rate';
 
-function Review({ review }) {
+function Review({ review, user }) {
   return (
     <div data-test="reviews">
-      <h4>{review.user}</h4>
+      <h4>Author: {user.name}</h4>
       <p>{review.text}</p>
       <Rate rating={review.rating} />
     </div>
@@ -14,7 +15,7 @@ function Review({ review }) {
 
 const mapStateToProps = (state, props) => {
   return {
-    review: state.reviews[props.id]
+    user: userByIdSelector(state, props)
   }
 }
 

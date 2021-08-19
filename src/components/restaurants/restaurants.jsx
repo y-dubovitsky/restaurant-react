@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Navigation from '../navigation';
 import Restaurant from './restaurant';
 import Basket from '../basket';
+import { restaurantListSelector } from '../../redux/selectors';
 
 function Restaurants({ restaurants }) {
 
@@ -22,7 +23,7 @@ function Restaurants({ restaurants }) {
 
 const mapStateToProps = (state) => {
   return {
-    restaurants: Object.values(state.restaurants)
+    restaurants: restaurantListSelector(state)
   }
 }
 
