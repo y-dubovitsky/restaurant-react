@@ -4,25 +4,25 @@ import Navigation from './navigation';
 import Restaurant from './restaurant';
 import Basket from './basket';
 
-function Restaurants({restaurants}) {
+function Restaurants({ restaurants }) {
 
-  const [currentRest, setCurrentRest] = useState(restaurants[0]);
+  //TODO Улучшить это
+  const [currentRestId, setCurrentRestId] = useState(restaurants[0].id);
 
   return (
     <div>
-      <Basket/>
+      <Basket />
       <Navigation
-        restaurants={restaurants}
-        onRestaurantClick={(id) => setCurrentRest(id)}
+        onRestaurantClick={(id) => setCurrentRestId(id)}
       />
-      <Restaurant {...currentRest}/>
+      <Restaurant id={currentRestId} />
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    restaurants: state.restaurants
+    restaurants: Object.values(state.restaurants)
   }
 }
 
