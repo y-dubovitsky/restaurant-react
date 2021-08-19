@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import Menu from './menu';
-import Reviews from './reviews';
-import Rate from './rate';
+import Menu from '../../menu';
+import Reviews from '../../reviews/reviews';
+import Rate from '../../rate';
 import { useMemo } from 'react';
 
 function Restaurant({ id, restaurant, reviewsIds }) {

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { increment, decrement } from '../redux/actions/action';
+import { increment, decrement } from '../../redux/actions/action';
 
 function Product(props) {
 

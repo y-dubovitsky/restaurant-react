@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { useState } from 'react';
-import Navigation from './navigation';
+import Navigation from '../navigation';
 import Restaurant from './restaurant';
-import Basket from './basket';
+import Basket from '../basket';
 
 function Restaurants({ restaurants }) {
 

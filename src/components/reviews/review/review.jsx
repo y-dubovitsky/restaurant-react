@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 
-import Rate from './rate';
+import Rate from '../../rate';
 
-//TODO Сделать еще 1 компонент Review
 function Review({ review }) {
   return (
     <div data-test="reviews">

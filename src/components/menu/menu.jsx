@@ -1,6 +1,6 @@
 import PropTypes, { string } from 'prop-types';
 import { Component } from 'react';
-import Product from './product';
+import Product from '../product/product';
 
 class Menu extends Component {
 

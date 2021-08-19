@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import BasketItem from "./basketItem";
-import {orderedProductsSelector, totalOrderPriceSelector} from '../redux/selectors';
+import {orderedProductsSelector, totalOrderPriceSelector} from '../../redux/selectors';
 
 function Basket({ products, totalOrderCost }) {
 
