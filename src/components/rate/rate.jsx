@@ -1,6 +1,6 @@
 import style from './rate.module.css';
 
-export default function rate({rating}) {
+export default function Rate({ rating }) {
 
   return (
     <div>

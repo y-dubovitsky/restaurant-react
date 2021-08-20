@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from "redux";
 import reducer from './reducer';
-import logger from './middleware/logger';
+import uuid from './middleware/uuid';
 
-export default createStore(reducer, applyMiddleware(logger));
+export default createStore(reducer, applyMiddleware(uuid));

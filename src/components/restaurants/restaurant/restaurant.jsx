@@ -2,11 +2,14 @@ import { connect } from 'react-redux';
 import Menu from '../../menu';
 import Reviews from '../../reviews/reviews';
 import Rate from '../../rate';
+import ReviewForm from '../../reviews/review-form/review-form';
 import {
   restaurantByIdSelector,
   restaurantReviewListSelector,
   averageRatingSelector
 } from '../../../redux/selectors';
+
+import style from './restaurant.module.css';
 
 function Restaurant({ id, restaurant, reviews, rating }) {
 
@@ -17,6 +20,7 @@ function Restaurant({ id, restaurant, reviews, rating }) {
       <Rate rating={rating} />
       <Menu menu={restaurant.menu} />
       <Reviews reviews={reviews} />
+      <ReviewForm restaurantId={id}/>
     </div>
   )
 }

@@ -1,0 +1,7 @@
+.productContainer {
+  background-color: rgb(188, 163, 255);
+  border-radius: 10px;
+  color: black;
+  margin: 5px;
+  box-shadow: 2px 2px 2px silver;
+}

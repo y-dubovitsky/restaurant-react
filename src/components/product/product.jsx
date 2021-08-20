@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { increment, decrement } from '../../redux/actions/action';
 
+import style from './product.module.css';
+
 function Product(props) {
 
-  const { id, product, amount, increment, decrement, fetchData } = props;
+  const { product, amount, increment, decrement, fetchData } = props;
 
   useEffect(() => {
     fetchData && fetchData(product.id);
   }, [])
 
   return (
-    <div data-test="product">
+    <div data-test="product" className={style.productContainer}>
       <p>{product.name}</p>
       <p>${product.price}</p>
-      <hr />
       <p>{product.ingredients.join(", ")}</p>
       <p data-test="product-amount">Amount: {amount}</p>
       <button data-test="product-decrement" onClick={decrement}>-</button>
