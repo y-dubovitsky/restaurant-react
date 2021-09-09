@@ -9,8 +9,7 @@ export default store => next => async action => {
   next({ ...action, type: type + LOADING })
 
   try {
-    const response = await fetch(callApi);
-    const data = await response.json();
+    const data = await callApi();
     
     next({ ...action, data, type: type + LOADED })
   } catch (error) {

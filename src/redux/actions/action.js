@@ -9,6 +9,7 @@ import {
   LOADED,
   ERROR,
 } from '../constants/constants';
+import requests from '../requests/requests';
 
 export const decrement = (id) => ({ type: DECREMENT, id });
 export const increment = (id) => ({ type: INCREMENT, id });
@@ -26,7 +27,7 @@ export const addReview = (review, props) => (
 export const loadRestaurants = () => (
   {
     type: FETCH_RESTAURANTS,
-    callApi: '/api/restaurants'
+    callApi: () => requests.loadRestaurants()
   }
 )
 
@@ -34,7 +35,7 @@ export const loadReviews = (restaurantId) => async (dispatch) => {
   dispatch({ type: FETCH_REVIEWS + LOADING, restaurantId });
 
   try {
-    const data = await fetch(`/api/reviews?id=${restaurantId}`).then(resp => resp.json());
+    const data = await requests.loadReviews(restaurantId);
     dispatch({ type: FETCH_REVIEWS + LOADED, data, restaurantId });
   } catch(error) {
     dispatch({type: FETCH_REVIEWS + ERROR, error, restaurantId});
