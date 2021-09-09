@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
-import orderReducer from './orderReducer';
-import restaurantsReducer from './restaurantsReducer';
-import productsReducer from './productsReducer';
-import reviewsReducer from './reviewsReducer';
-import usersReducer from './usersReducer';
+import order from './order';
+import restaurants from './restaurants';
+import products from './products';
+import reviews from './reviews';
+import users from './users';
 
 export default combineReducers({
-  order: orderReducer,
-  restaurants: restaurantsReducer,
-  products: productsReducer,
-  reviews: reviewsReducer,
-  users: usersReducer
+  order: order,
+  restaurants: restaurants,
+  products: products,
+  reviews: reviews,
+  users: users
 });
