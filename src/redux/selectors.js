@@ -1,10 +1,14 @@
 import { createSelector } from 'reselect';
+import { STATUS } from './constants/constants';
 
 const order = state => state.order;
 const productMap = state => state.products;
-const restaurantsMap = state => state.restaurants;
+const restaurantsMap = state => state.restaurants.entities;
 const reviewsMap = state => state.reviews;
 const usersMap = state => state.users;
+
+export const restaurantsLoadingSelector = state => state.restaurants.status === STATUS.loading;
+export const restaurantsLoadedSelector = state => state.restaurants.status === STATUS.loaded;
 
 //TODO Оптимизировать этот метод!
 export const orderedProductsSelector = createSelector(

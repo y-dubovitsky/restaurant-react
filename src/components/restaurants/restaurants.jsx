@@ -4,11 +4,15 @@ import Navigation from '../navigation';
 import Restaurant from './restaurant';
 import Basket from '../basket';
 import Loader from '../loader';
-import { restaurantListSelector } from '../../redux/selectors';
+import {
+  restaurantListSelector,
+  restaurantsLoadingSelector,
+  restaurantsLoadedSelector
+} from '../../redux/selectors';
 import { loadRestaurants } from '../../redux/actions/action';
 import { useEffect } from 'react';
 
-function Restaurants({ restaurants, loadRestaurants }) {
+function Restaurants({ restaurants, loadRestaurants, loading, loaded }) {
 
   //TODO Улучшить это
   const [currentRestId, setCurrentRestId] = useState(restaurants[0]?.id);
@@ -17,7 +21,7 @@ function Restaurants({ restaurants, loadRestaurants }) {
 
   const restaurantId = currentRestId || restaurants[0]?.id;
 
-  if(restaurants.length === 0) return <Loader/>;
+  if (loading || !loaded) return <Loader />; //TODO Зачем тут вообще loading если можно loaded просто использовать!
 
   return (
     <div>
@@ -32,7 +36,9 @@ function Restaurants({ restaurants, loadRestaurants }) {
 
 const mapStateToProps = (state) => {
   return {
-    restaurants: restaurantListSelector(state)
+    restaurants: restaurantListSelector(state),
+    loading: restaurantsLoadingSelector(state),
+    loaded: restaurantsLoadedSelector(state)
   }
 }
 

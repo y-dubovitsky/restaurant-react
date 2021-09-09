@@ -2,4 +2,17 @@ export const INCREMENT = 'increment';
 export const DECREMENT = 'decrement';
 export const REMOVE = 'remove';
 export const ADD_REVIEW = 'add_review';
-export const LOAD_RESTAURANTS = 'load_restaurants';
+
+export const FETCH_RESTAURANTS = 'fetch_restaurants';
+export const FETCH_REVIEWS = 'fetch_reviews';
+
+export const LOADING = 'loading';
+export const LOADED = 'loaded';
+export const ERROR = 'error';
+
+export const STATUS = {
+  empty: 'empty', //TODO Подумать, как лучше семантически назвать статус
+  loading: 'loading',
+  loaded: 'loaded',
+  error: 'error'
+}

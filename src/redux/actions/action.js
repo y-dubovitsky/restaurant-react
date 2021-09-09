@@ -3,12 +3,13 @@ import {
   INCREMENT,
   REMOVE,
   ADD_REVIEW,
-  LOAD_RESTAURANTS
+  FETCH_RESTAURANTS
 } from '../constants/constants';
 
 export const decrement = (id) => ({ type: DECREMENT, id });
 export const increment = (id) => ({ type: INCREMENT, id });
 export const remove = (id) => ({ type: REMOVE, id });
+
 export const addReview = (review, props) => (
   {
     type: ADD_REVIEW,
@@ -17,9 +18,10 @@ export const addReview = (review, props) => (
     generateId: ['reviewId', 'userId']
   }
 );
+
 export const loadRestaurants = () => (
   {
-    type: LOAD_RESTAURANTS,
+    type: FETCH_RESTAURANTS,
     callApi: '/api/restaurants'
   }
 )
