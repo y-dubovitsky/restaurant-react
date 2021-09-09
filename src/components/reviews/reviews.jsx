@@ -1,7 +1,15 @@
+import { connect } from 'react-redux';
 import Review from './review/review';
 
-//TODO Может убрать этот компонент?
-function Reviews({ reviews }) {
+import { loadReviews } from '../../redux/actions/action';
+import { useEffect } from 'react';
+
+function Reviews({ reviews, loadReviews, restaurantId }) {
+
+  useEffect((restaurantId) => {
+    loadReviews(restaurantId)
+  }, [restaurantId])
+
   return (
     <div data-test="reviews">
       {
@@ -13,4 +21,4 @@ function Reviews({ reviews }) {
   )
 }
 
-export default Reviews;
+export default connect(null, { loadReviews })(Reviews);
