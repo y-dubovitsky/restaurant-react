@@ -5,6 +5,7 @@ import {
   ADD_REVIEW,
   FETCH_RESTAURANTS,
   FETCH_REVIEWS,
+  FETCH_PRODUCTS,
   LOADING,
   LOADED,
   ERROR,
@@ -41,3 +42,10 @@ export const loadReviews = (restaurantId) => async (dispatch) => {
     dispatch({type: FETCH_REVIEWS + ERROR, error, restaurantId});
   }
 }
+
+export const loadProducts = (productId) => (
+  {
+    type: FETCH_PRODUCTS,
+    callApi: () => requests.loadProducts(productId)
+  }
+)

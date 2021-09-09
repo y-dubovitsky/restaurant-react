@@ -5,6 +5,7 @@ export const ADD_REVIEW = 'add_review';
 
 export const FETCH_RESTAURANTS = 'fetch_restaurants';
 export const FETCH_REVIEWS = 'fetch_reviews';
+export const FETCH_PRODUCTS = 'fetch_products';
 
 export const LOADING = 'loading';
 export const LOADED = 'loaded';
