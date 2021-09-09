@@ -5,7 +5,7 @@ const order = state => state.order;
 const productMap = state => state.products.entities;
 const restaurantsMap = state => state.restaurants.entities;
 const reviewsMap = state => state.reviews;
-const usersMap = state => state.users;
+const usersMap = state => state.users.entities;
 
 // ---------------------------- Restaurants ----------------------------
 export const restaurantsLoadingSelector = state => state.restaurants.status === STATUS.loading;

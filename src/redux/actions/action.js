@@ -6,6 +6,7 @@ import {
   FETCH_RESTAURANTS,
   FETCH_REVIEWS,
   FETCH_PRODUCTS,
+  FETCH_USERS,
   LOADING,
   LOADED,
   ERROR,
@@ -30,7 +31,7 @@ export const loadRestaurants = () => (
     type: FETCH_RESTAURANTS,
     callApi: () => requests.loadRestaurants()
   }
-)
+);
 
 export const loadReviews = (restaurantId) => async (dispatch) => {
   dispatch({ type: FETCH_REVIEWS + LOADING, restaurantId });
@@ -38,14 +39,25 @@ export const loadReviews = (restaurantId) => async (dispatch) => {
   try {
     const data = await requests.loadReviews(restaurantId);
     dispatch({ type: FETCH_REVIEWS + LOADED, data, restaurantId });
-  } catch(error) {
-    dispatch({type: FETCH_REVIEWS + ERROR, error, restaurantId});
+  } catch (error) {
+    dispatch({ type: FETCH_REVIEWS + ERROR, error, restaurantId });
   }
-}
+};
 
 export const loadProducts = (productId) => (
   {
     type: FETCH_PRODUCTS,
     callApi: () => requests.loadProducts(productId)
   }
-)
+);
+
+export const loadUsers = () => async (dispatch) => {
+  dispatch({ type: FETCH_USERS + LOADING });
+
+  try {
+    const users = await requests.loadUsers();
+    dispatch({ type: FETCH_USERS + LOADED, users });
+  } catch (error) {
+    dispatch({ type: FETCH_USERS + ERROR, error });
+  }
+};
