@@ -4,37 +4,40 @@ import { STATUS } from './constants/constants';
 const order = state => state.order;
 const productMap = state => state.products.entities;
 const restaurantsMap = state => state.restaurants.entities;
-const reviewsMap = state => state.reviews;
+const reviewsMap = state => state.reviews.entities;
 const usersMap = state => state.users.entities;
 
 // ---------------------------- Restaurants ----------------------------
 export const restaurantsLoadingSelector = state => state.restaurants.status === STATUS.loading;
 export const restaurantsLoadedSelector = state => state.restaurants.status === STATUS.loaded;
 
+export const restaurantReviewsLoadingSelector = state => state.reviews.status === STATUS.loading;
+export const restaurantReviewsLoadedSelector = state => state.reviews.status === STATUS.loaded;
+
 export const restaurantListSelector = createSelector([restaurantsMap], (restaurantsMap) => {
   return Object.values(restaurantsMap);
 });
 
-export const restaurantByIdSelector = (state, { id }) => restaurantsMap(state)[id];
+export const restaurantByIdSelector = ((state, { id }) => {
+  return restaurantsMap(state)[id];
+});
 
-export const restaurantReviewListSelector = (state, { id }) => {
+export const restaurantReviewsListSelector = (state, { id }) => {
   const reviewList = restaurantsMap(state)[id].reviews.map(key => {
     return reviewsMap(state)[key];
   })
-
-  return reviewList;
+  return reviewList; // просто список, не map
 };
 
-export const restaurantReviewIdListSelector = (state, { id }) => {
-  return restaurantsMap(state)[id].reviews;
-};
-
-export const averageRatingSelector = createSelector([restaurantReviewListSelector], (reviews) => {
-  const sum = reviews.map(review => review.rating).reduce((prev, cur) => prev + cur, 0);
-  const average = Math.round(Math.floor(sum / reviews.length));
-
-  return average;
-});
+export const averageRatingSelector = createSelector(
+  restaurantByIdSelector,
+  reviewsMap,
+  (restaurant, reviews) => {
+    const ratings = restaurant.reviews.map((id) => reviews[id]?.rating || 0);
+    return Math.round(
+      ratings.reduce((acc, rating) => acc + rating, 0) / ratings.length
+    );
+  });
 
 // ---------------------------- Products -------------------------------
 export const productByIdSelector = (state, id) => {

@@ -14,15 +14,21 @@ import { useEffect } from 'react';
 
 function Restaurants({ restaurants, loadRestaurants, loading, loaded }) {
 
-  //TODO Улучшить это
+  // Берем 1ый ресторан и выбираем его id
   const [currentRestId, setCurrentRestId] = useState(restaurants[0]?.id);
 
-  useEffect(() => loadRestaurants(), []);
+  useEffect(() => {
+    if (!loading && !loaded) loadRestaurants();
+  }, [loading, loaded]);
+
+
+  if (!loaded) {
+    return <Loader />; //TODO Зачем тут вообще loading если можно loaded просто использовать!
+  }
 
   const restaurantId = currentRestId || restaurants[0]?.id;
 
-  if (loading || !loaded) return <Loader />; //TODO Зачем тут вообще loading если можно loaded просто использовать!
-
+  console.log(restaurantId);
   return (
     <div>
       <Basket />
@@ -36,7 +42,7 @@ function Restaurants({ restaurants, loadRestaurants, loading, loaded }) {
 
 const mapStateToProps = (state) => {
   return {
-    restaurants: restaurantListSelector(state),
+    restaurants: restaurantListSelector(state), // Загрузили все для всего приложения рестораны!
     loading: restaurantsLoadingSelector(state),
     loaded: restaurantsLoadedSelector(state)
   }
