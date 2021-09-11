@@ -1,4 +1,3 @@
-import produce from "immer";
 import {
   ADD_REVIEW,
   ERROR,
@@ -47,12 +46,20 @@ export default (state = initState, action) => {
       }
     }
     case ADD_REVIEW: {
-      return produce(state, draft => {
-        draft[restaurantId].reviews.push(reviewId);
-
-        return draft;
-      })
-    }
-    default: return state
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          [restaurantId]: {
+            ...state.entities[restaurantId],
+            reviews: [
+              ...state.entities[restaurantId].reviews,
+              reviewId
+            ]
+          }
+        }
+      }
   }
+    default: return state
+}
 }

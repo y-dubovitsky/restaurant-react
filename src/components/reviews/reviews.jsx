@@ -1,28 +1,40 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Review from './review/review';
 import Loader from '../loader/loader';
 
-import { loadReviews } from '../../redux/actions/action';
+import {
+  loadReviews,
+  loadUsers
+} from '../../redux/actions/action';
+
 import {
   restaurantReviewsListSelector,
   restaurantReviewsLoadedSelector,
   restaurantReviewsLoadingSelector
 } from '../../redux/selectors';
-import { useEffect } from 'react';
 
-function Reviews({ reviews, loadReviews, restaurantId, reviewsIsLoading, reviewsIsLoaded }) {
+function Reviews(
+  {
+    reviews,
+    loadReviews,
+    loadUsers,
+    restaurantId,
+    reviewsIsLoading,
+    reviewsIsLoaded }
+) {
 
   useEffect((restaurantId) => {
-    loadReviews(restaurantId)
+    loadReviews(restaurantId);
+    loadUsers();
   }, [restaurantId])
 
   if (reviewsIsLoading || !reviewsIsLoaded) return <Loader />;
-
   return (
     <div data-test="reviews">
       {
         reviews.map(review => {
-          return <Review key={review.id} review={review} />
+          return <Review key={review.id} id={review.id} />
         })
       }
     </div>
@@ -37,4 +49,4 @@ const mapStateToProps = (state, props) => (
   }
 )
 
-export default connect(mapStateToProps, { loadReviews })(Reviews);
+export default connect(mapStateToProps, { loadReviews, loadUsers })(Reviews);

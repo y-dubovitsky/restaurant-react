@@ -8,7 +8,6 @@ import Rate from '../../rate';
 import ReviewForm from '../../reviews/review-form/review-form';
 import Reviews from '../../reviews/reviews';
 
-
 function Restaurant({ restaurant, averageRating }) {
 
   return (

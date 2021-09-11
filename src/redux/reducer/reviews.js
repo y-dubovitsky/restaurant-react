@@ -1,3 +1,4 @@
+import produce from 'immer';
 import { ADD_REVIEW, ERROR, FETCH_REVIEWS, LOADED, LOADING, STATUS } from '../constants/constants';
 
 const initState = {
@@ -19,17 +20,21 @@ export default (state = initState, action) => {
       }
     }
     case FETCH_REVIEWS + LOADED: {
-      const entities = data.reduce((acc, review) => (
-        {
-          ...acc,
-          [review.id]: review
-        }
-      ), {});
+      //TODO Вынести в отдельную функцию
+      const result = produce(state, draft => {
+        const entities = data.reduce((acc, review) => (
+          {
+            ...acc,
+            [review.id]: review
+          }
+        ), {});
+
+        Object.assign(draft.entities, entities);
+      })
 
       return {
-        ...state,
+        ...result,
         status: STATUS.loaded,
-        entities
       }
     }
     case FETCH_REVIEWS + ERROR: {
@@ -40,15 +45,20 @@ export default (state = initState, action) => {
       }
     }
     case ADD_REVIEW: {
-      return {
+      const updatedReviews = {
         ...state,
-        [reviewId]: {
-          id: reviewId,
-          userId,
-          text: review.text,
-          rating: review.rating
+        entities: {
+          ...state.entities,
+          [reviewId]: {
+            id: reviewId,
+            userId,
+            text: review.text,
+            rating: review.rating
+          }
         }
       }
+
+      return updatedReviews;
     }
     default: return state
   }

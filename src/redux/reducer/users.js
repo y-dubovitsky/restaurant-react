@@ -32,10 +32,9 @@ export default produce((draft = initState, action) => {
         }
       ), {});
 
-      return {
-        ...draft,
-        entities
-      }
+      Object.assign(draft.entities, entities);
+
+      break;
     }
     case FETCH_USERS + ERROR: {
       return {
@@ -44,10 +43,8 @@ export default produce((draft = initState, action) => {
       }
     }
     case ADD_REVIEW: {
-      draft[userId] = {
-        id: userId,
-        name: review.name
-      }
+      Object.assign(draft.entities, {[userId] : {id: userId, name: review.name}})
+
       break;
     }
     default: return draft;

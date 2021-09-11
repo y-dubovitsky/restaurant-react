@@ -21,14 +21,12 @@ function Restaurants({ restaurants, loadRestaurants, loading, loaded }) {
     if (!loading && !loaded) loadRestaurants();
   }, [loading, loaded]);
 
-
   if (!loaded) {
     return <Loader />; //TODO Зачем тут вообще loading если можно loaded просто использовать!
   }
 
   const restaurantId = currentRestId || restaurants[0]?.id;
 
-  console.log(restaurantId);
   return (
     <div>
       <Basket />

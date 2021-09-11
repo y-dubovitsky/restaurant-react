@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import reviews from '../components/reviews/reviews';
 import { STATUS } from './constants/constants';
 
 const order = state => state.order;
@@ -68,13 +69,28 @@ export const totalOrderPriceSelector = createSelector([orderedProductsSelector],
 });
 
 // ---------------------------- Review ----------------------------------
-export const reviewByIdSelector = (state, { id }) => {
-  return reviewsMap(state)[id];
+export const reviewByIdSelector = (state, props) => {
+  return reviewsMap(state)[props.id];
+}
+
+export const reviewByIdWithUserSelector = (state, props) => {
+  const review = reviewsMap(state)[props.id];
+  const user = userByIdSelector(state, { id: review.userId });
+
+  return {
+    id: review.id,
+    text: review.text,
+    rating: review.rating,
+    user: {
+      ...user
+    }
+  }
 }
 
 // ---------------------------- Users ----------------------------------
-export const userByIdSelector = (state, props) => {
-  const user = usersMap(state)[props.review.userId];
+export const userByIdSelector = (state, { id }) => {
+  const user = usersMap(state)[id];
+
   return user;
 }
 
