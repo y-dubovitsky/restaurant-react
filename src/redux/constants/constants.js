@@ -3,6 +3,8 @@ export const DECREMENT = 'decrement';
 export const REMOVE = 'remove';
 export const ADD_REVIEW = 'add_review';
 
+export const PICK_RESTAURANT = 'PICK_RESTAURANT';
+
 export const FETCH_RESTAURANTS = 'fetch_restaurants';
 export const FETCH_REVIEWS = 'fetch_reviews';
 export const FETCH_PRODUCTS = 'fetch_products';

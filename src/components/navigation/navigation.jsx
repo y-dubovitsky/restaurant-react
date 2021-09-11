@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import {restaurantListSelector} from '../../redux/selectors';
+import { restaurantListSelector } from '../../redux/selectors';
 
 function Navigation({ restaurants, onRestaurantClick }) {
   return (

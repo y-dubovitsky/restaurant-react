@@ -3,6 +3,7 @@ import {
   INCREMENT,
   REMOVE,
   ADD_REVIEW,
+  PICK_RESTAURANT,
   FETCH_RESTAURANTS,
   FETCH_REVIEWS,
   FETCH_PRODUCTS,
@@ -61,3 +62,7 @@ export const loadUsers = () => async (dispatch) => {
     dispatch({ type: FETCH_USERS + ERROR, error });
   }
 };
+
+export const setCurrentRestaurant = (id) => (dispatch) => {
+  dispatch({type: PICK_RESTAURANT, id})
+}

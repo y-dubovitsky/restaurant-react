@@ -1,12 +1,17 @@
 import { createSelector } from 'reselect';
-import reviews from '../components/reviews/reviews';
 import { STATUS } from './constants/constants';
 
 const order = state => state.order;
+const currentRestaurantSelector = state => state.currentRestaurant;
 const productMap = state => state.products.entities;
 const restaurantsMap = state => state.restaurants.entities;
 const reviewsMap = state => state.reviews.entities;
 const usersMap = state => state.users.entities;
+
+// ---------------------------- Current Restaurants ----------------------------
+export const currentRestaurantIdSelector = state => {
+  return currentRestaurantSelector(state).currentRestaurantId;
+}
 
 // ---------------------------- Restaurants ----------------------------
 export const restaurantsLoadingSelector = state => state.restaurants.status === STATUS.loading;

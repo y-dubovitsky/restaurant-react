@@ -1,49 +1,60 @@
 import { connect } from 'react-redux';
-import { useState } from 'react';
 import Navigation from '../navigation';
 import Restaurant from './restaurant';
 import Basket from '../basket';
 import Loader from '../loader';
+
 import {
   restaurantListSelector,
   restaurantsLoadingSelector,
-  restaurantsLoadedSelector
+  restaurantsLoadedSelector,
+  currentRestaurantIdSelector
 } from '../../redux/selectors';
-import { loadRestaurants } from '../../redux/actions/action';
+
+import {
+  loadRestaurants,
+  setCurrentRestaurant
+} from '../../redux/actions/action';
+
 import { useEffect } from 'react';
 
-function Restaurants({ restaurants, loadRestaurants, loading, loaded }) {
-
-  // Берем 1ый ресторан и выбираем его id
-  const [currentRestId, setCurrentRestId] = useState(restaurants[0]?.id);
+function Restaurants(
+  {
+    allRestaurants,
+    currentRestaurantId,
+    loadRestaurants,
+    setCurrentRestaurant,
+    loading,
+    loaded
+  }
+) {
 
   useEffect(() => {
-    if (!loading && !loaded) loadRestaurants();
+    if (!loading && !loaded) {
+      loadRestaurants();
+    }
   }, [loading, loaded]);
 
   if (!loaded) {
-    return <Loader />; //TODO Зачем тут вообще loading если можно loaded просто использовать!
+    return <Loader />;
   }
-
-  const restaurantId = currentRestId || restaurants[0]?.id;
 
   return (
     <div>
       <Basket />
-      <Navigation
-        onRestaurantClick={(id) => setCurrentRestId(id)}
-      />
-      <Restaurant id={restaurantId} />
+      <Navigation onRestaurantClick={setCurrentRestaurant} />
+      <Restaurant id={currentRestaurantId || allRestaurants[0]?.id} />
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    restaurants: restaurantListSelector(state), // Загрузили все для всего приложения рестораны!
+    currentRestaurantId: currentRestaurantIdSelector(state),
+    allRestaurants: restaurantListSelector(state), // Загрузили все для всего приложения рестораны!
     loading: restaurantsLoadingSelector(state),
     loaded: restaurantsLoadedSelector(state)
   }
 }
 
-export default connect(mapStateToProps, { loadRestaurants })(Restaurants);
+export default connect(mapStateToProps, { loadRestaurants, setCurrentRestaurant })(Restaurants);
