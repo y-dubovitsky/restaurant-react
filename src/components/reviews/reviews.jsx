@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Review from './review/review';
 import Loader from '../loader/loader';
+import ReviewForm from '../reviews/review-form/review-form';
 
 import {
   loadReviews,
@@ -37,6 +38,7 @@ function Reviews(
           return <Review key={review.id} id={review.id} />
         })
       }
+      <ReviewForm restaurantId={restaurantId} />
     </div>
   )
 }
