@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../navigation';
 import Restaurant from './restaurant';
@@ -16,7 +17,7 @@ import {
   setCurrentRestaurant
 } from '../../redux/actions/action';
 
-import { useEffect } from 'react';
+import style from './restaurants.module.css';
 
 function Restaurants(
   {
@@ -40,7 +41,7 @@ function Restaurants(
   }
 
   return (
-    <div>
+    <div className={style.restaurants}>
       <Basket />
       <Navigation onRestaurantClick={setCurrentRestaurant} />
       <Restaurant id={currentRestaurantId || allRestaurants[0]?.id} />

@@ -1,6 +1,7 @@
 const normalizedRestaurants = [
   {
     id: 'a757a0e9-03c1-4a2a-b384-8ac21dbe2fb2',
+    image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80',
     name: 'Dishoom',
     menu: [
       'd75f762a-eadd-49be-8918-ed0daa8dd024',
@@ -14,6 +15,7 @@ const normalizedRestaurants = [
   },
   {
     id: 'bb8afbec-2fec-491f-93e9-7f13950dd80b',
+    image: 'https://images.unsplash.com/photo-1440637475816-2e8bf1d4b6f3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80',
     name: 'Homeslice',
     menu: [
       '25402233-0095-49ea-9939-1e67ed89ffb9',
@@ -27,6 +29,7 @@ const normalizedRestaurants = [
   },
   {
     id: '982bfbce-c5e0-41a0-9f99-d5c20ecee49d',
+    image: 'https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
     name: 'Fabrique',
     menu: [
       '08c9ffa0-d003-4310-9e15-20978743296e',
@@ -37,6 +40,7 @@ const normalizedRestaurants = [
   },
   {
     id: 'd9241927-09e1-44f3-8986-a76346869037',
+    image: 'https://images.unsplash.com/photo-1603976895280-eaee11c618fc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=622&q=80',
     name: 'Flat Iron',
     menu: [
       '6c02c2ce-b868-4191-b4a7-8686429f4bac',

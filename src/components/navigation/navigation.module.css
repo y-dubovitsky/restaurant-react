@@ -1,0 +1,16 @@
+.navigation {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  color: whitesmoke;
+}
+
+.nav {
+  width: 300px;
+  height: 400px;
+  background-size: contain;
+}
+
+.nav:hover {
+  transform: scale(0.98);
+}

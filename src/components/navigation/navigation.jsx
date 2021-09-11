@@ -1,18 +1,25 @@
 import { connect } from 'react-redux';
 import { restaurantListSelector } from '../../redux/selectors';
 
+import style from './navigation.module.css';
+
 function Navigation({ restaurants, onRestaurantClick }) {
   return (
-    <div>
+    <div className={style.navigation}>
       {
-        restaurants.map(restaurant => (
-          <button
-            key={restaurant.id}
-            onClick={() => onRestaurantClick(restaurant.id)}
-          >
-            {restaurant.name}
-          </button>
-        ))
+        restaurants.map(restaurant => {
+          console.log(restaurant.image);
+          return (
+            <div
+              key={restaurant.id}
+              onClick={() => onRestaurantClick(restaurant.id)}
+              className={style.nav}
+              style={{ backgroundImage: `url(${restaurant.image})` }}
+            >
+              <h2>{restaurant.name}</h2>
+            </div>
+          );
+        })
       }
     </div>
   )
