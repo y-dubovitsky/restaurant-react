@@ -1,12 +1,17 @@
 import Loader from '../loader';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
+
 import {
   increment,
   decrement,
   loadProducts
 } from '../../redux/actions/action';
-import { productByIdSelector } from '../../redux/selectors';
+
+import {
+  productByIdSelector,
+  orderProductAmountSelector
+} from '../../redux/selectors';
 
 import style from './product.module.css';
 
@@ -18,14 +23,14 @@ function Product(props) {
     loadProducts();
   }, [])
 
-  if(!product) return <Loader/>;
+  if (!product) return <Loader />;
 
   return (
     <div data-test="product" className={style.productContainer}>
       <p>{product.name}</p>
       <p>${product.price}</p>
       <p>{product.ingredients.join(", ")}</p>
-      <p data-test="product-amount">Amount: {amount}</p>
+      <p data-test="product-amount">Amount: {amount || 0}</p>
       <button data-test="product-decrement" onClick={decrement}>-</button>
       <button onClick={increment}>+</button>
     </div>
@@ -34,6 +39,7 @@ function Product(props) {
 
 const mapStateToProps = (state, props) => (
   {
+    amount: orderProductAmountSelector(state, props),
     product: productByIdSelector(state, props.id)
   }
 )

@@ -73,6 +73,10 @@ export const totalOrderPriceSelector = createSelector([orderedProductsSelector],
   return product.reduce((acc, { amount, price }) => acc + amount * price, 0)
 });
 
+export const orderProductAmountSelector = (state, props) => {
+  return order(state)[props.id];
+}
+
 // ---------------------------- Review ----------------------------------
 export const reviewByIdSelector = (state, props) => {
   return reviewsMap(state)[props.id];

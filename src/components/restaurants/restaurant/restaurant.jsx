@@ -8,12 +8,14 @@ import Menu from '../../menu';
 import Rate from '../../rate';
 import Reviews from '../../reviews/reviews';
 
+import style from './restaurant.module.css';
+
 function Restaurant({ restaurant, averageRating }) {
 
   const [revToMenuSwitcher, setRevToMenuSwitcher] = useState(true);
 
   return (
-    <div>
+    <div className={style.restaurant}>
       <h3>{restaurant.name}</h3>
       <h4>Average Rating: </h4>
       {!!averageRating && <Rate rating={averageRating} />}
