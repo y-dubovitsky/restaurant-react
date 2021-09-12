@@ -1,4 +1,11 @@
-import { ERROR, FETCH_PRODUCTS, LOADED, LOADING, STATUS } from '../constants/constants';
+import produce from 'immer';
+import {
+  ERROR,
+  FETCH_CURRENT_REST_PRODUCTS,
+  LOADED,
+  LOADING,
+  STATUS
+} from '../constants/constants';
 
 const initState = {
   status: STATUS.empty,
@@ -11,32 +18,36 @@ export default (state = initState, action) => {
   const { type, data, error } = action;
 
   switch (type) {
-    case FETCH_PRODUCTS + LOADING: {
-      return {
-        ...state,
-        error: null,
-        status: STATUS.loading
-      }
-    }
-    case FETCH_PRODUCTS + LOADED: {
-      const entities = data.reduce((acc, prod) => (
-        {
-          ...acc,
-          [prod.id]: prod
-        }
-      ), {})
+    case FETCH_CURRENT_REST_PRODUCTS + LOADING : {
+
+      console.log(state);
 
       return {
         ...state,
-        status: STATUS.loaded,
-        entities
+        status: STATUS.loading,
+        error: null
       }
     }
-    case FETCH_PRODUCTS + ERROR: {
+    case FETCH_CURRENT_REST_PRODUCTS + LOADED: {
+      const entities = data.reduce((acc,product) => {
+        return {
+          ...acc,
+          [product.id]: {
+            product
+          }
+        }
+      }, {});
+      
+      return produce(state, draft => {
+        Object.assign(draft.entities, entities);
+        draft.status = STATUS.loaded;
+      })
+    }
+    case FETCH_CURRENT_REST_PRODUCTS + ERROR: {
       return {
         ...state,
-        status: STATUS.error,
-        error: error
+        error,
+        status: STATUS.error
       }
     }
     default: return state;

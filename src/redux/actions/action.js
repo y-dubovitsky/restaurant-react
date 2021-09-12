@@ -4,9 +4,9 @@ import {
   REMOVE,
   ADD_REVIEW,
   PICK_RESTAURANT,
+  FETCH_CURRENT_REST_PRODUCTS,
   FETCH_RESTAURANTS,
   FETCH_REVIEWS,
-  FETCH_PRODUCTS,
   FETCH_USERS,
   LOADING,
   LOADED,
@@ -45,13 +45,6 @@ export const loadReviews = (restaurantId) => async (dispatch) => {
   }
 };
 
-export const loadProducts = (productId) => (
-  {
-    type: FETCH_PRODUCTS,
-    callApi: () => requests.loadProducts(productId)
-  }
-);
-
 export const loadUsers = () => async (dispatch) => {
   dispatch({ type: FETCH_USERS + LOADING });
 
@@ -64,5 +57,16 @@ export const loadUsers = () => async (dispatch) => {
 };
 
 export const setCurrentRestaurant = (id) => (dispatch) => {
-  dispatch({type: PICK_RESTAURANT, id})
+  dispatch({ type: PICK_RESTAURANT, id })
+}
+
+export const loadCurrentRestaurantProducts = (curRestId) => async (dispatch) => {
+  dispatch({ type: FETCH_CURRENT_REST_PRODUCTS + LOADING });
+
+  try {
+    const data = await requests.loadProducts(curRestId);
+    dispatch({ type: FETCH_CURRENT_REST_PRODUCTS + LOADED, data, curRestId });
+  } catch (error) {
+    dispatch({ type: FETCH_CURRENT_REST_PRODUCTS + ERROR, curRestId });
+  }
 }

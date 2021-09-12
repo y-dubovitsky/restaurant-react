@@ -12,8 +12,11 @@
   background-size: contain;
   border-radius: 10px;
   box-shadow: 1px 2px 3px gray;
+  transition: 0.2s ease-in all;
 }
 
 .nav:hover {
   transform: scale(0.98);
+  background-blend-mode: multiply;
+  background-color: rgb(181, 138, 221);
 }

@@ -1,16 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  averageRatingSelector,
-  restaurantByIdSelector
-} from '../../../redux/selectors';
 import Menu from '../../menu';
 import Rate from '../../rate';
 import Reviews from '../../reviews/reviews';
 
+import {
+  averageRatingSelector,
+  restaurantByIdSelector,
+  currentRestaurantIdSelector
+} from '../../../redux/selectors';
+
+import { loadCurrentRestaurantProducts } from '../../../redux/actions/action';
+
 import style from './restaurant.module.css';
 
-function Restaurant({ restaurant, averageRating }) {
+function Restaurant(
+  {
+    currentRestaurantId,
+    loadCurrentRestaurantProducts,
+    restaurant,
+    averageRating
+  }
+) {
+
+  useEffect(() => {
+    loadCurrentRestaurantProducts(currentRestaurantId);
+  }, [currentRestaurantId])
 
   const [revToMenuSwitcher, setRevToMenuSwitcher] = useState(true);
 
@@ -32,9 +47,10 @@ function Restaurant({ restaurant, averageRating }) {
 
 const mapStateToProps = (state, props) => {
   return {
+    currentRestaurantId: currentRestaurantIdSelector(state),
     restaurant: restaurantByIdSelector(state, props),
     averageRating: averageRatingSelector(state, props)
   }
 }
 
-export default connect(mapStateToProps)(Restaurant);
+export default connect(mapStateToProps, {loadCurrentRestaurantProducts})(Restaurant);

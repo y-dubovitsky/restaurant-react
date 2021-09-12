@@ -1,4 +1,6 @@
-import { PICK_RESTAURANT } from "../constants/constants";
+import {
+  PICK_RESTAURANT,
+} from "../constants/constants";
 
 const initState = {
   currentRestaurantId: null

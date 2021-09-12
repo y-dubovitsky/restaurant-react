@@ -10,7 +10,6 @@ export default store => next => async action => {
 
   try {
     const data = await callApi();
-    
     next({ ...action, data, type: type + LOADED })
   } catch (error) {
     next({ ...action, type: type + ERROR, error })

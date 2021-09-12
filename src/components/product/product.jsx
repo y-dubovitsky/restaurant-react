@@ -5,31 +5,29 @@ import { useEffect } from 'react';
 import {
   increment,
   decrement,
-  loadProducts
 } from '../../redux/actions/action';
 
 import {
   productByIdSelector,
-  orderProductAmountSelector
+  orderProductAmountSelector,
+  productLoadingSelector,
+  productLoadedSelector
 } from '../../redux/selectors';
 
 import style from './product.module.css';
 
 function Product(props) {
 
-  const { product, amount, increment, decrement, loadProducts } = props;
+  const { product, amount, increment, decrement, loading, loaded } = props;
 
-  useEffect(() => {
-    loadProducts();
-  }, [])
+  if (loading || !loaded) return <Loader />;
 
-  if (!product) return <Loader />;
-
+  console.log(product.product.id);
   return (
     <div data-test="product" className={style.productContainer}>
-      <p>{product.name}</p>
-      <p>${product.price}</p>
-      <p>{product.ingredients.join(", ")}</p>
+      <p>{product.product.name}</p>
+      <p>${product.product.price}</p>
+      <p>{product.product.ingredients.join(", ")}</p>
       <p data-test="product-amount">Amount: {amount || 0}</p>
       <button data-test="product-decrement" onClick={decrement}>-</button>
       <button onClick={increment}>+</button>
@@ -39,6 +37,8 @@ function Product(props) {
 
 const mapStateToProps = (state, props) => (
   {
+    loading: productLoadingSelector(state),
+    loaded: productLoadedSelector(state),
     amount: orderProductAmountSelector(state, props),
     product: productByIdSelector(state, props.id)
   }
@@ -47,7 +47,6 @@ const mapStateToProps = (state, props) => (
 const mapDispatchToProps = (dispatch, props) => ({
   increment: () => dispatch(increment(props.id)),
   decrement: () => dispatch(decrement(props.id)),
-  loadProducts: () => dispatch(loadProducts(props.id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

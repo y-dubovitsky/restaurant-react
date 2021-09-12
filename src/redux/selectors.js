@@ -46,6 +46,9 @@ export const averageRatingSelector = createSelector(
   });
 
 // ---------------------------- Products -------------------------------
+export const productLoadingSelector = state => state.products.status === STATUS.loading;
+export const productLoadedSelector = state => state.products.status === STATUS.loaded;
+
 export const productByIdSelector = (state, id) => {
   const product = productMap(state)[id];
 
