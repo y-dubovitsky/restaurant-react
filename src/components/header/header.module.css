@@ -5,6 +5,7 @@
   opacity: 0.5;
   width: 100vw;
   height: 50px;
+  z-index: 50;
 }
 
 .header ul {

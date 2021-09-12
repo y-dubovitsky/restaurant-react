@@ -1,8 +1,9 @@
+import style from './loader.module.css';
+
 function Loader() {
-  return(
-    <>
-      <h1>...Loading</h1>
-    </>
+  return (
+    <div className={style.loader}>
+    </div>
   )
 }
 
