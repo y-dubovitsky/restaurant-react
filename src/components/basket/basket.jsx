@@ -10,7 +10,6 @@ function Basket({ products, totalOrderCost }) {
 
   return (
     <div className={style.basket}>
-      <h1>Basket:</h1>
       <i><FontAwesomeIcon icon={faShoppingBasket} /></i>
       {
         products.map(product => {

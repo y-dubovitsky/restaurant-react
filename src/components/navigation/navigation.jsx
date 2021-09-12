@@ -5,7 +5,7 @@ import style from './navigation.module.css';
 
 function Navigation({ restaurants, onRestaurantClick }) {
   return (
-    <>
+    <div className={style.navContainer}>
       <h1>Our Restaurants:</h1>
       <div className={style.navigation}>
         {
@@ -23,7 +23,7 @@ function Navigation({ restaurants, onRestaurantClick }) {
           })
         }
       </div>
-    </>
+    </div>
   )
 }
 

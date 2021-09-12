@@ -1,0 +1,10 @@
+.footer {
+  width: 100%;
+  border-top: 2px solid silver;
+  width: auto;
+  background-color: whitesmoke;
+}
+
+.footer ul {
+  display: flex;
+}

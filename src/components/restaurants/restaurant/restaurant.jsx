@@ -53,4 +53,4 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-export default connect(mapStateToProps, {loadCurrentRestaurantProducts})(Restaurant);
+export default connect(mapStateToProps, { loadCurrentRestaurantProducts })(Restaurant);

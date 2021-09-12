@@ -1,9 +1,17 @@
+.navContainer {
+  color: white;
+}
+
+h1 {
+  font-size: 4rem;
+  text-shadow: 1px 1px 1px black;
+}
+
 .navigation {
   padding: 0 10px;
   margin: 20px 0;
   display: flex;
   justify-content: space-between;
-  color: whitesmoke;
 }
 
 .nav {
