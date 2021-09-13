@@ -1,41 +1,40 @@
 import { createSelector } from 'reselect';
 import {
-  createAction,
-  createReducer
+  createSlice
 } from '@reduxjs/toolkit';
 
 import { productMap } from '../selectors';
 
-// ----------------------------------- Actions -----------------------------------
-
-export const increment = createAction('order/increment');
-export const decrement = createAction('order/decrement');
-export const remove = createAction('order/remove');
-
-// ----------------------------------- Reducer -----------------------------------
-
-const reducer = createReducer({}, {
-  [increment]: (state, { payload: id }) => {
-    return {
-      ...state,
-      [id]: (state[id] || 0) + 1
-    }
-  },
-  [decrement]: (state, { payload: id }) => {
-    return {
-      ...state,
-      [id]: state[id] > 0 ? state[id] - 1 : 0
-    }
-  },
-  [remove]: (state, { payload: id }) => {
-    return {
-      ...state,
-      [id]: 0
-    }
-  },
+// ----------------------------------- Slice (reducer + actions) -----------------------------------
+const { reducer, actions } = createSlice({
+  name: 'order',
+  initialState: {},
+  reducers: {
+    increment: (state, { payload: id }) => {
+      return {
+        ...state,
+        [id]: (state[id] || 0) + 1
+      }
+    },
+    decrement: (state, { payload: id }) => {
+      return {
+        ...state,
+        [id]: state[id] > 0 ? state[id] - 1 : 0
+      }
+    },
+    remove: (state, { payload: id }) => {
+      return {
+        ...state,
+        [id]: 0
+      }
+    },
+  }
 });
 
+const { increment, decrement, remove } = actions;
+
 export default reducer;
+export { increment, decrement, remove };
 
 // ----------------------------------- Selectors -----------------------------------
 const order = state => state.order;
