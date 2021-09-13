@@ -33,7 +33,7 @@ export default (state = initState, action) => {
         return {
           ...acc,
           [product.id]: {
-            product
+            ...product
           }
         }
       }, {});
@@ -41,7 +41,7 @@ export default (state = initState, action) => {
       return produce(state, draft => {
         Object.assign(draft.entities, entities);
         draft.status = STATUS.loaded;
-      })
+      });
     }
     case FETCH_CURRENT_REST_PRODUCTS + ERROR: {
       return {

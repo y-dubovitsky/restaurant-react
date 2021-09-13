@@ -63,7 +63,6 @@ export const orderedProductsSelector = createSelector(
   (products, order) => {
     const orderIds = Object.keys(order);
     const productArray = Object.keys(products).map(key => products[key]);
-
     return productArray.filter(product => orderIds.includes(product.id)).map(product => {
       return {
         ...product,

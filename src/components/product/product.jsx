@@ -22,12 +22,11 @@ function Product(props) {
 
   if (loading || !loaded) return <Loader />;
 
-  console.log(product.product.id);
   return (
     <div data-test="product" className={style.productContainer}>
-      <p>{product.product.name}</p>
-      <p>${product.product.price}</p>
-      <p>{product.product.ingredients.join(", ")}</p>
+      <p>{product.name}</p>
+      <p>${product.price}</p>
+      <p>{product.ingredients.join(", ")}</p>
       <p data-test="product-amount">Amount: {amount || 0}</p>
       <button data-test="product-decrement" onClick={decrement}>-</button>
       <button onClick={increment}>+</button>
