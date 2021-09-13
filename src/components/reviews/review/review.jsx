@@ -18,10 +18,19 @@ function Review(props) {
   const { text, rating, user } = reviewWithUser;
 
   return (
-    <div data-test="reviews" className={style.reviewContainer}>
-      <h4>Author: {user.name}</h4>
-      <p>{text}</p>
-      <Rate rating={rating} />
+    <div
+      className={style.reviewContainer}
+      data-test="reviews"
+    >
+      <div className={style.review}>
+        <div className={style.author}>
+          <h4>Author: {user.name}</h4>
+        </div>
+        <div className={style.info}>
+          <p>{text}</p>
+          <Rate rating={rating} />
+        </div>
+      </div>
     </div>
   )
 }

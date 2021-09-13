@@ -1,10 +1,60 @@
 .footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.desContainer {
+  display: flex;
+  align-items: center;
+}
+
+.description, .social {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  border-top: 2px solid silver;
+  height: 100px;
   width: auto;
   background-color: whitesmoke;
 }
 
-.footer ul {
+.social {
+  width: 100%;
+  justify-content: end;
+}
+
+.social ul li i:hover {
+  transform: scale(1.1);
+  color: black;
+}
+
+.up, .down{
+  height: 50px;
+  opacity: 0.8;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-top: 1px solid silver;
+  border-bottom: 1px solid silver;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  flex-direction: row;
+}
+
+ul li {
+  display: inline-block;
+}
+
+ul li:hover, ul li i {
+  color: rgb(71, 71, 71);
+  transition: 0.5s ease;
+}
+
+ul li i {
+  color: silver;
+  font-size: 2rem;
 }

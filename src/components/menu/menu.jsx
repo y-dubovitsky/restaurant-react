@@ -1,6 +1,7 @@
-import PropTypes, { string } from 'prop-types';
 import { Component } from 'react';
 import Product from '../product/product';
+
+import style from './menu.module.css';
 
 class Menu extends Component {
 
@@ -8,7 +9,7 @@ class Menu extends Component {
     const { menu } = this.props;
 
     return (
-      <div>
+      <div className={style.menu}>
         {
           menu.map((id) => {
             return <Product key={id} id={id} />

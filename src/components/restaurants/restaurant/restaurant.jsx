@@ -32,10 +32,11 @@ function Restaurant(
   return (
     <div className={style.restaurant}>
       <h3>{restaurant.name}</h3>
-      <h4>Average Rating: </h4>
       {!!averageRating && <Rate rating={averageRating} />}
-      <button onClick={() => setRevToMenuSwitcher(true)}>Menu</button>
-      <button onClick={() => setRevToMenuSwitcher(false)}>Reviews</button>
+      <div className={style.switcher}>
+        <button onClick={() => setRevToMenuSwitcher(true)}>Menu</button>
+        <button onClick={() => setRevToMenuSwitcher(false)}>Reviews</button>
+      </div>
       {revToMenuSwitcher ?
         <Menu menu={restaurant.menu} />
         :

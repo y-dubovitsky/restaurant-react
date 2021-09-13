@@ -12,9 +12,9 @@ function Navigation({ restaurants, onRestaurantClick }) {
           restaurants.map(restaurant => {
             return (
               <div
+                className={style.nav}
                 key={restaurant.id}
                 onClick={() => onRestaurantClick(restaurant.id)}
-                className={style.nav}
                 style={{ backgroundImage: `url(${restaurant.image})` }}
               >
                 <h2>{restaurant.name}</h2>

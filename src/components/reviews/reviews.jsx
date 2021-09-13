@@ -15,6 +15,8 @@ import {
   restaurantReviewsLoadingSelector
 } from '../../redux/selectors';
 
+import style from './reviews.module.css';
+
 function Reviews(
   {
     reviews,
@@ -32,7 +34,10 @@ function Reviews(
 
   if (reviewsIsLoading || !reviewsIsLoaded) return <Loader />;
   return (
-    <div data-test="reviews">
+    <div
+      className={style.reviews}
+      data-test="reviews"
+    >
       {
         reviews.map(review => {
           return <Review key={review.id} id={review.id} />

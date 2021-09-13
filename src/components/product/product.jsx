@@ -23,13 +23,20 @@ function Product(props) {
   if (loading || !loaded) return <Loader />;
 
   return (
-    <div data-test="product" className={style.productContainer}>
-      <p>{product.name}</p>
-      <p>${product.price}</p>
-      <p>{product.ingredients.join(", ")}</p>
-      <p data-test="product-amount">Amount: {amount || 0}</p>
-      <button data-test="product-decrement" onClick={decrement}>-</button>
-      <button onClick={increment}>+</button>
+    <div
+      className={style.product}
+      data-test="product"
+    >
+      <div className={style.description}>
+        <h2>{product.name}</h2>
+        <p>${product.price}</p>
+        <p>{product.ingredients.join(", ")}</p>
+      </div>
+      <div className={style.order}>
+        <p data-test="product-amount">Amount: {amount || 0}</p>
+        <button data-test="product-decrement" onClick={decrement}>-</button>
+        <button onClick={increment}>+</button>
+      </div>
     </div>
   )
 }

@@ -3,6 +3,8 @@ import { useState } from "react";
 import Rate from '../../rate';
 import { addReview } from '../../../redux/actions/action';
 
+import style from './review-form.module.css';
+
 const INIT_FORM_STATE = {
   name: '',
   text: '',
@@ -34,7 +36,7 @@ function ReviewForm({ handleSubmit }) {
   }
 
   return (
-    <div>
+    <div className={style.reviewForm}>
       <form onSubmit={handleFormSubmit}>
         <label htmlFor="user">User</label>
         <input
@@ -44,8 +46,7 @@ function ReviewForm({ handleSubmit }) {
           onChange={handleInputChange}
         />
         <label htmlFor="review">Review</label>
-        <input
-          type="text"
+        <textarea
           name="text"
           placeholder="review"
           onChange={handleInputChange}
