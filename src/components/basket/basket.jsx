@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import BasketItem from "./basketItem";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
-import { orderedProductsSelector, totalOrderPriceSelector } from '../../redux/selectors';
+import { orderedProductsSelector, totalOrderPriceSelector } from '../../redux/features/order';
 
 import style from './basket.module.css';
 

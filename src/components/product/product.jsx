@@ -1,18 +1,18 @@
 import Loader from '../loader';
 import { connect } from 'react-redux';
-import { useEffect } from 'react';
 
 import {
   increment,
   decrement,
-} from '../../redux/actions/action';
+} from '../../redux/features/order';
 
 import {
   productByIdSelector,
-  orderProductAmountSelector,
   productLoadingSelector,
   productLoadedSelector
 } from '../../redux/selectors';
+
+import { orderProductAmountSelector } from '../../redux/features/order';
 
 import style from './product.module.css';
 

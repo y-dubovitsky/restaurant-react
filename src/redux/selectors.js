@@ -1,9 +1,8 @@
 import { createSelector } from 'reselect';
 import { STATUS } from './constants/constants';
 
-const order = state => state.order;
+export const productMap = state => state.products.entities;
 const currentRestaurantSelector = state => state.currentRestaurant;
-const productMap = state => state.products.entities;
 const restaurantsMap = state => state.restaurants.entities;
 const reviewsMap = state => state.reviews.entities;
 const usersMap = state => state.users.entities;
@@ -56,28 +55,7 @@ export const productByIdSelector = (state, id) => {
 };
 
 // ---------------------------- Order ----------------------------------
-//TODO Оптимизировать этот метод!
-export const orderedProductsSelector = createSelector(
-  // Массив значений, от которых зависит, будет ли пересчитываться функция
-  [productMap, order],
-  (products, order) => {
-    const orderIds = Object.keys(order);
-    const productArray = Object.keys(products).map(key => products[key]);
-    return productArray.filter(product => orderIds.includes(product.id)).map(product => {
-      return {
-        ...product,
-        amount: order[product.id]
-      }
-    })
-  });
 
-export const totalOrderPriceSelector = createSelector([orderedProductsSelector], (product) => {
-  return product.reduce((acc, { amount, price }) => acc + amount * price, 0)
-});
-
-export const orderProductAmountSelector = (state, props) => {
-  return order(state)[props.id];
-}
 
 // ---------------------------- Review ----------------------------------
 export const reviewByIdSelector = (state, props) => {

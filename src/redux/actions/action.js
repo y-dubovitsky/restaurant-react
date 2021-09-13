@@ -1,7 +1,4 @@
 import {
-  DECREMENT,
-  INCREMENT,
-  REMOVE,
   ADD_REVIEW,
   PICK_RESTAURANT,
   FETCH_CURRENT_REST_PRODUCTS,
@@ -13,10 +10,6 @@ import {
   ERROR,
 } from '../constants/constants';
 import requests from '../requests/requests';
-
-export const decrement = (id) => ({ type: DECREMENT, id });
-export const increment = (id) => ({ type: INCREMENT, id });
-export const remove = (id) => ({ type: REMOVE, id });
 
 export const addReview = (review, props) => (
   {

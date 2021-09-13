@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { increment, decrement, remove } from '../../../redux/actions/action';
+import { increment, decrement, remove } from '../../../redux/features/order';
 
 function BasketItem({ product, increment, decrement, remove }) {
 
