@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 import { STATUS } from './constants/constants';
+import { reviewsMap } from './features/reviews';
 
 export const productMap = state => state.products.entities;
 const currentRestaurantSelector = state => state.currentRestaurant;
 const restaurantsMap = state => state.restaurants.entities;
-const reviewsMap = state => state.reviews.entities;
 const usersMap = state => state.users.entities;
 
 // ---------------------------- Current Restaurants ----------------------------
@@ -58,23 +58,7 @@ export const productByIdSelector = (state, id) => {
 
 
 // ---------------------------- Review ----------------------------------
-export const reviewByIdSelector = (state, props) => {
-  return reviewsMap(state)[props.id];
-}
 
-export const reviewByIdWithUserSelector = (state, props) => {
-  const review = reviewsMap(state)[props.id];
-  const user = userByIdSelector(state, { id: review.userId });
-
-  return {
-    id: review.id,
-    text: review.text,
-    rating: review.rating,
-    user: {
-      ...user
-    }
-  }
-}
 
 // ---------------------------- Users ----------------------------------
 export const userByIdSelector = (state, { id }) => {

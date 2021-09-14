@@ -5,9 +5,12 @@ import Loader from '../loader/loader';
 import ReviewForm from '../reviews/review-form/review-form';
 
 import {
-  loadReviews,
   loadUsers
 } from '../../redux/actions/action';
+
+import {
+  loadReviews
+} from '../../redux/features/reviews';
 
 import {
   restaurantReviewsListSelector,

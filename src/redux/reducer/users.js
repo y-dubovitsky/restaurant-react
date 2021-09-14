@@ -1,10 +1,14 @@
 import produce from "immer";
+
 import {
-  ADD_REVIEW,
   ERROR,
   FETCH_USERS,
   LOADED, LOADING, STATUS
 } from '../constants/constants';
+
+import {
+  addReview,
+} from '../features/reviews';
 
 const initState = {
   status: STATUS.empty,
@@ -14,7 +18,12 @@ const initState = {
 
 export default produce((draft = initState, action) => {
 
-  const { type, userId, review, users, error } = action;
+  const {
+    type,
+    payload,
+    meta,
+    users,
+    error } = action;
 
   switch (type) {
     case FETCH_USERS + LOADING: {
@@ -42,8 +51,11 @@ export default produce((draft = initState, action) => {
         error
       }
     }
-    case ADD_REVIEW: {
-      Object.assign(draft.entities, {[userId] : {id: userId, name: review.name}})
+    case addReview.type: {
+      const { review } = payload;
+      const { userId } = meta;
+
+      Object.assign(draft.entities, { [userId]: { id: userId, name: review.name } })
 
       break;
     }

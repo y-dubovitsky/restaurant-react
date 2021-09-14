@@ -1,11 +1,14 @@
 import {
-  ADD_REVIEW,
   ERROR,
   FETCH_RESTAURANTS,
   LOADED,
   LOADING,
   STATUS
 } from '../constants/constants';
+
+import {
+  addReview,
+} from '../features/reviews';
 
 const initState = {
   status: STATUS.empty,
@@ -14,7 +17,12 @@ const initState = {
 }
 
 export default (state = initState, action) => {
-  const { type, reviewId, restaurantId, data, error } = action;
+  const {
+    type,
+    payload,
+    meta,
+    data,
+    error } = action;
 
   switch (type) {
     case FETCH_RESTAURANTS + LOADING: {
@@ -45,7 +53,11 @@ export default (state = initState, action) => {
         error: error
       }
     }
-    case ADD_REVIEW: {
+    case addReview.type: {
+
+      const { reviewId } = meta;
+      const { restaurantId } = payload;
+
       return {
         ...state,
         entities: {
@@ -59,7 +71,7 @@ export default (state = initState, action) => {
           }
         }
       }
-  }
+    }
     default: return state
-}
+  }
 }

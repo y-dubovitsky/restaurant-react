@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { useState } from "react";
 import Rate from '../../rate';
-import { addReview } from '../../../redux/actions/action';
+import { addReview } from '../../../redux/features/reviews';
 
 import style from './review-form.module.css';
 

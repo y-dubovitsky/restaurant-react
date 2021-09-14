@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import {
   reviewByIdWithUserSelector,
-} from '../../../redux/selectors';
+} from '../../../redux/features/reviews';
 
 import Loader from '../../loader/loader';
 
