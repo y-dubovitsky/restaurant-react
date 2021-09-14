@@ -50,8 +50,6 @@ const initialState = {
   error: null
 }
 
-console.log(initialState);
-
 const { reducer } = createSlice({
   name: 'reviews',
   initialState,

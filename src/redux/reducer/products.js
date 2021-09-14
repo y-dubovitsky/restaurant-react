@@ -1,4 +1,4 @@
-import produce from 'immer';
+import { createNextState as produce } from '@reduxjs/toolkit';
 import {
   ERROR,
   FETCH_CURRENT_REST_PRODUCTS,
@@ -18,7 +18,7 @@ export default (state = initState, action) => {
   const { type, data, error } = action;
 
   switch (type) {
-    case FETCH_CURRENT_REST_PRODUCTS + LOADING : {
+    case FETCH_CURRENT_REST_PRODUCTS + LOADING: {
 
       console.log(state);
 
@@ -29,7 +29,7 @@ export default (state = initState, action) => {
       }
     }
     case FETCH_CURRENT_REST_PRODUCTS + LOADED: {
-      const entities = data.reduce((acc,product) => {
+      const entities = data.reduce((acc, product) => {
         return {
           ...acc,
           [product.id]: {
@@ -37,7 +37,7 @@ export default (state = initState, action) => {
           }
         }
       }, {});
-      
+
       return produce(state, draft => {
         Object.assign(draft.entities, entities);
         draft.status = STATUS.loaded;
