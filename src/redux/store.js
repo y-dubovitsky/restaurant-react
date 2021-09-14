@@ -1,8 +1,15 @@
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import reducer from './reducer';
-import thunk from 'redux-thunk';
 import uuid from './middleware/uuid';
 import api from './middleware/api';
 
-export default createStore(reducer, composeWithDevTools(applyMiddleware(thunk, api, uuid)));
+export default configureStore({
+  reducer,
+  middleware: (getDefaultMiddleware) => (
+    getDefaultMiddleware(
+      {
+        serializableCheck:
+          { ignoredActionPaths: ['callApi'] }
+      }).concat([api, uuid])
+  )
+});
