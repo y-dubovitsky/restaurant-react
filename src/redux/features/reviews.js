@@ -1,14 +1,11 @@
 import produce from 'immer';
 import requests from '../requests/requests';
 import { userByIdSelector } from '../selectors';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 import {
-  ERROR,
-  LOADED,
-  LOADING,
   STATUS
 } from '../constants/constants';
-import { createAction } from '@reduxjs/toolkit';
 
 export const ADD_REVIEW = 'ADD_REVIEW';
 export const FETCH_REVIEWS = 'FETCH_REVIEWS';
@@ -28,18 +25,15 @@ export const addReview = createAction(
         generateId: ['reviewId', 'userId']
       }
     }
-  ));
+  )
+);
 
-export const loadReviews = (restaurantId) => async (dispatch) => {
-  dispatch({ type: FETCH_REVIEWS + LOADING, restaurantId });
-
-  try {
-    const data = await requests.loadReviews(restaurantId);
-    dispatch({ type: FETCH_REVIEWS + LOADED, data, restaurantId });
-  } catch (error) {
-    dispatch({ type: FETCH_REVIEWS + ERROR, error, restaurantId });
+export const loadReviews = createAsyncThunk(
+  'reviews/load',
+  (restaurantId) => {
+    return requests.loadReviews(restaurantId);
   }
-};
+);
 
 // ------------------------------- Reducer -------------------------------
 
@@ -56,21 +50,20 @@ export default (state = initState, action) => {
     payload,
     meta,
     userId,
-    data,
     error } = action;
 
   switch (type) {
-    case FETCH_REVIEWS + LOADING: {
+    case loadReviews.pending.type: {
       return {
         ...state,
         status: STATUS.loading,
         error: null
       }
     }
-    case FETCH_REVIEWS + LOADED: {
+    case loadReviews.fulfilled.type: {
       //TODO Вынести в отдельную функцию
       const result = produce(state, draft => {
-        const entities = data.reduce((acc, review) => (
+        const entities = payload.reduce((acc, review) => (
           {
             ...acc,
             [review.id]: review
@@ -85,7 +78,7 @@ export default (state = initState, action) => {
         status: STATUS.loaded,
       }
     }
-    case FETCH_REVIEWS + ERROR: {
+    case loadReviews.rejected.type: {
       return {
         ...state,
         status: STATUS.error,
