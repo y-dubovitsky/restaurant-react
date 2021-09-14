@@ -1,7 +1,7 @@
 import produce from 'immer';
 import requests from '../requests/requests';
 import { userByIdSelector } from '../selectors';
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import {
   STATUS
@@ -16,7 +16,7 @@ export const addReview = createAction(
   'reviews/add', // Название action-a
   (review, props) => ( // Функция
     {
-      type: ADD_REVIEW,
+      type: ADD_REVIEW, //FIXME Можно убрать!
       payload: { // Данные
         review,
         restaurantId: props.restaurantId,
@@ -37,31 +37,33 @@ export const loadReviews = createAsyncThunk(
 
 // ------------------------------- Reducer -------------------------------
 
-const initState = {
+const initialState = {
   status: STATUS.empty,
   entities: {},
   error: null
 }
 
-export default (state = initState, action) => {
+const { reducer } = createSlice({
+  name: 'reviews',
+  initialState,
+  reducers: {
+    // An object of "case reducers". Key names will be used to generate actions.
+    //reducers: Object<string, ReducerFunction | ReducerAndPrepareObject>
 
-  const {
-    type,
-    payload,
-    meta,
-    userId,
-    error } = action;
-
-  switch (type) {
-    case loadReviews.pending.type: {
+    // Как я понял, тут мы и свои экшены формируем и редьюсеры, которые будут выполняться при этих экшенах!
+  },
+  extraReducers: {
+    // Т.к. экшены уже есть, нужно к ним просто редьюсеры(реакции на экшн!) привязать!
+    [loadReviews.pending.type]: (state, action) => {
       return {
         ...state,
         status: STATUS.loading,
         error: null
       }
-    }
-    case loadReviews.fulfilled.type: {
-      //TODO Вынести в отдельную функцию
+    },
+    [loadReviews.fulfilled.type]: (state, action) => {
+      const { payload } = action;
+
       const result = produce(state, draft => {
         const entities = payload.reduce((acc, review) => (
           {
@@ -77,18 +79,21 @@ export default (state = initState, action) => {
         ...result,
         status: STATUS.loaded,
       }
-    }
-    case loadReviews.rejected.type: {
+    },
+    [loadReviews.rejected.type]: (state, action) => {
+
+      const { error } = action;
+
       return {
         ...state,
         status: STATUS.error,
-        error
+        error: error
       }
-    }
-    case addReview.type: {
+    },
+    [addReview.type]: (state, action) => {
 
-      const { review } = payload;
-      const { reviewId } = meta;
+      const { review } = action.payload;
+      const { reviewId, userId } = action.meta;
 
       const updatedReviews = {
         ...state,
@@ -102,12 +107,12 @@ export default (state = initState, action) => {
           }
         }
       }
-
       return updatedReviews;
     }
-    default: return state
   }
-}
+});
+
+export default reducer;
 
 // ------------------------------- Selectors -------------------------------
 export const reviewsMap = state => state.reviews.entities;
