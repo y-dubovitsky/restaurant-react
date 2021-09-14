@@ -1,7 +1,12 @@
-import produce from 'immer';
 import requests from '../requests/requests';
 import { userByIdSelector } from '../selectors';
-import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+import {
+  createAction,
+  createAsyncThunk,
+  createSlice,
+  createEntityAdapter
+} from '@reduxjs/toolkit';
 
 import {
   STATUS
@@ -36,12 +41,16 @@ export const loadReviews = createAsyncThunk(
 );
 
 // ------------------------------- Reducer -------------------------------
+// Это сущность, которая в себе содержит объект с методами для работы с коллекциями
+const Reviews = createEntityAdapter();
 
 const initialState = {
+  ...Reviews.getInitialState(),
   status: STATUS.empty,
-  entities: {},
   error: null
 }
+
+console.log(initialState);
 
 const { reducer } = createSlice({
   name: 'reviews',
@@ -50,10 +59,12 @@ const { reducer } = createSlice({
     // An object of "case reducers". Key names will be used to generate actions.
     //reducers: Object<string, ReducerFunction | ReducerAndPrepareObject>
 
-    // Как я понял, тут мы и свои экшены формируем и редьюсеры, которые будут выполняться при этих экшенах!
+    // Как я понял, тут мы и свои экшены формируем и редьюсеры, 
+    // которые будут выполняться при этих экшенах!
   },
   extraReducers: {
-    // Т.к. экшены уже есть, нужно к ним просто редьюсеры(реакции на экшн!) привязать!
+    // Т.к. экшены уже есть, 
+    // нужно к ним просто редьюсеры(реакции на экшн!) привязать!
     [loadReviews.pending.type]: (state, action) => {
       return {
         ...state,
@@ -64,21 +75,15 @@ const { reducer } = createSlice({
     [loadReviews.fulfilled.type]: (state, action) => {
       const { payload } = action;
 
-      const result = produce(state, draft => {
-        const entities = payload.reduce((acc, review) => (
-          {
-            ...acc,
-            [review.id]: review
-          }
-        ), {});
+      const entities = payload.reduce((acc, review) => (
+        {
+          ...acc,
+          [review.id]: review
+        }
+      ), {});
 
-        Object.assign(draft.entities, entities);
-      })
-
-      return {
-        ...result,
-        status: STATUS.loaded,
-      }
+      state.status = STATUS.loaded;
+      Reviews.addMany(state, entities);
     },
     [loadReviews.rejected.type]: (state, action) => {
 
@@ -95,19 +100,12 @@ const { reducer } = createSlice({
       const { review } = action.payload;
       const { reviewId, userId } = action.meta;
 
-      const updatedReviews = {
-        ...state,
-        entities: {
-          ...state.entities,
-          [reviewId]: {
-            id: reviewId,
-            userId,
-            text: review.text,
-            rating: review.rating
-          }
-        }
-      }
-      return updatedReviews;
+      Reviews.addOne(state, {
+        id: reviewId,
+        userId,
+        text: review.text,
+        rating: review.rating
+      });
     }
   }
 });
