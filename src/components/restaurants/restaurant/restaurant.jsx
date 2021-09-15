@@ -28,7 +28,6 @@ function Restaurant(
   }, [currentRestaurantId])
 
   const [revToMenuSwitcher, setRevToMenuSwitcher] = useState(true);
-
   return (
     <div className={style.restaurant}>
       <h3>{restaurant.name}</h3>

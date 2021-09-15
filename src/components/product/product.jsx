@@ -20,23 +20,27 @@ function Product(props) {
 
   const { product, amount, increment, decrement, loading, loaded } = props;
 
-  if (loading || !loaded) return <Loader />;
-
   return (
     <div
       className={style.product}
       data-test="product"
     >
-      <div className={style.description}>
-        <h2>{product.name}</h2>
-        <p>${product.price}</p>
-        <p>{product.ingredients.join(", ")}</p>
-      </div>
-      <div className={style.order}>
-        <p data-test="product-amount">Amount: {amount || 0}</p>
-        <button data-test="product-decrement" onClick={decrement}>-</button>
-        <button onClick={increment}>+</button>
-      </div>
+      {(loading || !loaded) ?
+        <Loader />
+        :
+        <>
+          <div className={style.description}>
+            <h2>{product.name}</h2>
+            <p>${product.price}</p>
+            <p>{product.ingredients.join(", ")}</p>
+          </div>
+          <div className={style.order}>
+            <button data-test="product-decrement" onClick={decrement}>-</button>
+            <p data-test="product-amount">{amount || 0}</p>
+            <button onClick={increment}>+</button>
+          </div>
+        </>
+      }
     </div>
   )
 }

@@ -16,6 +16,10 @@ export default function Footer() {
       </a>
       <div className={style.desContainer}>
         <div className={style.description}>
+          <div className={style.logo}>
+            <img src={process.env.PUBLIC_URL + '/logo100_120.png'} alt=""/>
+            <h3>Consegna del cibo</h3>
+          </div>
           <ul>
             <li>Для ресторанов</li>
             <li>Курьерам</li>
@@ -34,7 +38,7 @@ export default function Footer() {
         </div>
       </div>
       <div className={style.down}>
-        © 2000–{new Date().getFullYear()}, ООО «RunWay Restaurant», официальный сайт
+        © 2000–{new Date().getFullYear()}, ООО «Consegna del cibo», официальный сайт
       </div>
     </div>
   )
