@@ -15,10 +15,13 @@ import {
 import { orderProductAmountSelector } from '../../redux/features/order';
 
 import style from './product.module.css';
+import { useContext } from 'react';
+import { MoneyContext } from '../../context/money-context';
 
 function Product(props) {
 
   const { product, amount, increment, decrement, loading, loaded } = props;
+  const { recalculatePrice } = useContext(MoneyContext);
 
   return (
     <div
@@ -31,7 +34,7 @@ function Product(props) {
         <>
           <div className={style.description}>
             <h2>{product.name}</h2>
-            <p>${product.price}</p>
+            <p>{recalculatePrice(product.price)}</p>
             <p>{product.ingredients.join(", ")}</p>
           </div>
           <div className={style.order}>

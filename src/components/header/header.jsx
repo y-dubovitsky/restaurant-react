@@ -1,3 +1,4 @@
+import CurrencySwitcher from '../currency-switcher/currency-switcher';
 import style from './header.module.css';
 
 export default function Header() {
@@ -7,6 +8,7 @@ export default function Header() {
         <img src={process.env.PUBLIC_URL + '/logo100_120.png'} alt="coming soon..." />
         <p>Consegna del cibo</p>
       </div>
+      <CurrencySwitcher/>
       <div className={style.menu}>
         <ul>
           <li>Home</li>
