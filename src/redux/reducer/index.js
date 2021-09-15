@@ -3,7 +3,7 @@ import restaurants from './restaurants';
 import products from './products';
 import reviews from '../features/reviews';
 import users from '../features/users';
-import currentRestaurant from './currentRestaurant';
+import currentRestaurant from '../features/currentRestaurant';
 
 export default {
   order: order,

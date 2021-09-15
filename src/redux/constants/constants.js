@@ -1,4 +1,3 @@
-export const PICK_RESTAURANT = 'PICK_RESTAURANT';
 
 export const FETCH_RESTAURANTS = 'fetch_restaurants';
 export const FETCH_CURRENT_REST_PRODUCTS = 'FETCH_CURRENT_REST_PRODUCTS';

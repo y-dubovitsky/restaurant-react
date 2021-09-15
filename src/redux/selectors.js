@@ -3,13 +3,10 @@ import { STATUS } from './constants/constants';
 import { reviewsMap } from './features/reviews';
 
 export const productMap = state => state.products.entities;
-const currentRestaurantSelector = state => state.currentRestaurant;
 const restaurantsMap = state => state.restaurants.entities;
 
 // ---------------------------- Current Restaurants ----------------------------
-export const currentRestaurantIdSelector = state => {
-  return currentRestaurantSelector(state).currentRestaurantId;
-}
+
 
 // ---------------------------- Restaurants ----------------------------
 export const restaurantsLoadingSelector = state => state.restaurants.status === STATUS.loading;

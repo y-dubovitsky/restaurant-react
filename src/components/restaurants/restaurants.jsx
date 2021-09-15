@@ -9,13 +9,13 @@ import {
   restaurantListSelector,
   restaurantsLoadingSelector,
   restaurantsLoadedSelector,
-  currentRestaurantIdSelector
 } from '../../redux/selectors';
 
 import {
   loadRestaurants,
-  setCurrentRestaurant
 } from '../../redux/actions/action';
+
+import { setCurrentRestaurant, currentRestaurantIdSelector } from '../../redux/features/currentRestaurant';
 
 import style from './restaurants.module.css';
 

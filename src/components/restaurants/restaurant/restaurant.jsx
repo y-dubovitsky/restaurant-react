@@ -7,10 +7,10 @@ import Reviews from '../../reviews/reviews';
 import {
   averageRatingSelector,
   restaurantByIdSelector,
-  currentRestaurantIdSelector
 } from '../../../redux/selectors';
 
 import { loadCurrentRestaurantProducts } from '../../../redux/actions/action';
+import { currentRestaurantIdSelector } from '../../../redux/features/currentRestaurant';
 
 import style from './restaurant.module.css';
 

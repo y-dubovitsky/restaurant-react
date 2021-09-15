@@ -1,10 +1,6 @@
 import {
-  ADD_REVIEW,
-  PICK_RESTAURANT,
   FETCH_CURRENT_REST_PRODUCTS,
   FETCH_RESTAURANTS,
-  FETCH_REVIEWS,
-  FETCH_USERS,
   LOADING,
   LOADED,
   ERROR,
@@ -17,10 +13,6 @@ export const loadRestaurants = () => (
     callApi: () => requests.loadRestaurants()
   }
 );
-
-export const setCurrentRestaurant = (id) => (dispatch) => {
-  dispatch({ type: PICK_RESTAURANT, id })
-}
 
 export const loadCurrentRestaurantProducts = (curRestId) => async (dispatch) => {
   dispatch({ type: FETCH_CURRENT_REST_PRODUCTS + LOADING });
