@@ -5,11 +5,11 @@ import Loader from '../loader/loader';
 import ReviewForm from '../reviews/review-form/review-form';
 
 import {
-  loadUsers
-} from '../../redux/actions/action';
+  loadUsers,
+} from '../../redux/features/users';
 
 import {
-  loadReviews
+  loadReviews,
 } from '../../redux/features/reviews';
 
 import {

@@ -1,5 +1,5 @@
 import requests from '../requests/requests';
-import { userByIdSelector } from '../selectors';
+import { userByIdSelector } from './users';
 
 import {
   createAction,

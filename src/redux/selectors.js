@@ -5,7 +5,6 @@ import { reviewsMap } from './features/reviews';
 export const productMap = state => state.products.entities;
 const currentRestaurantSelector = state => state.currentRestaurant;
 const restaurantsMap = state => state.restaurants.entities;
-const usersMap = state => state.users.entities;
 
 // ---------------------------- Current Restaurants ----------------------------
 export const currentRestaurantIdSelector = state => {
@@ -61,9 +60,5 @@ export const productByIdSelector = (state, id) => {
 
 
 // ---------------------------- Users ----------------------------------
-export const userByIdSelector = (state, { id }) => {
-  const user = usersMap(state)[id];
 
-  return user;
-}
 

@@ -18,17 +18,6 @@ export const loadRestaurants = () => (
   }
 );
 
-export const loadUsers = () => async (dispatch) => {
-  dispatch({ type: FETCH_USERS + LOADING });
-
-  try {
-    const users = await requests.loadUsers();
-    dispatch({ type: FETCH_USERS + LOADED, users });
-  } catch (error) {
-    dispatch({ type: FETCH_USERS + ERROR, error });
-  }
-};
-
 export const setCurrentRestaurant = (id) => (dispatch) => {
   dispatch({ type: PICK_RESTAURANT, id })
 }
