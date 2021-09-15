@@ -1,16 +1,11 @@
-import { produce } from 'immer';
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import requests from "../requests/requests";
 
 import {
-  STATUS
-} from '../constants/constants';
-
-import {
   addReview,
 } from '../features/reviews';
-
+import produce from "immer";
 
 // --------------------------- Action ---------------------------
 
@@ -24,59 +19,54 @@ export const loadUsers = createAsyncThunk(
 // --------------------------- Reducer ---------------------------
 
 const initState = {
-  status: STATUS.empty,
   entities: {},
   error: null
 }
 
-export default ((state = initState, action) => {
-
-  const {
-    type,
-    payload, // Данные, которые пришли
-    meta,
-    error } = action;
-
-  switch (type) {
-    case loadUsers.pending.type: {
+const { reducer } = createSlice({
+  name: 'reviews',
+  initialState: initState,
+  extraReducers: {
+    [loadUsers.pending.type]: (state) => {
       return {
         ...state,
         error: null,
-        status: STATUS.loading
       }
-    }
-    case loadUsers.fulfilled.type: {
+    },
+    [loadUsers.fulfilled.type]: (state, action) => {
       const result = produce(state, draft => {
-        const entities = payload.reduce((acc, user) => (
+        const entities = action.payload.reduce((acc, user) => (
           {
             ...acc,
             [user.id]: user
           }
         ), {});
-
         Object.assign(draft.entities, entities);
-        draft.status = STATUS.loaded;
       });
 
-      return result;
-    }
-    case loadUsers.rejected.type: {
+      // МБ Придется статусы добавлять!
+      return {
+        ...result
+      }
+    },
+    [loadUsers.rejected.type]: (state, action) => {
+      console.log(action);
       return {
         ...state,
-        error
+        error: null
       }
+    },
+    'reviews/add': (state, action) => { //FIXME Вместо addReview импортирования используем константу!
+      const { review } = action.payload;
+      const { userId } = action.meta;
+      
+      Object.assign(state.entities, { [userId]: { id: userId, name: review.name } })
     }
-    case addReview.type: {
-      const { review } = payload;
-      const { userId } = meta;
-
-      return produce(state, draft => {
-        Object.assign(draft.entities, { [userId]: { id: userId, name: review.name } })
-      })
-    }
-    default: return state;
   }
 });
+
+export default reducer;
+
 
 // --------------------------- Selectors ---------------------------
 const usersMap = state => state.users.entities;
