@@ -3,6 +3,7 @@ import BasketItem from "./basketItem";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
 import { orderedProductsSelector, totalOrderPriceSelector } from '../../redux/features/order';
+import { Link } from 'react-router-dom';
 
 import { useContext } from 'react';
 import { MoneyContext } from '../../context/money-context';
@@ -22,6 +23,9 @@ function Basket({ products, totalOrderCost }) {
         })
       }
       <h3>Total Cost: {recalculatePrice(totalOrderCost)}</h3>
+      <Link to="/checkout">
+        <button>Checkout</button>
+      </Link>
     </div>
   )
 }

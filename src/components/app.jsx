@@ -4,19 +4,19 @@ import Footer from './footer/footer';
 import Header from './header/header';
 import Hero from './hero/hero';
 import Restaurants from './restaurants';
-import MoneyProvider from '../context/money-context';
+import Basket from './basket';
+import { Route } from 'react-router-dom';
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <MoneyProvider>
-          <Header />
-          <Hero />
-          <Description />
-          <Restaurants />
-          <Footer />
-        </MoneyProvider>
+        <Header />
+        <Hero />
+        <Description />
+        <Route path="/checkout" component={Basket} />
+        <Route path="/restaurants" component={Restaurants} />
+        <Footer />
       </div>
     )
   }

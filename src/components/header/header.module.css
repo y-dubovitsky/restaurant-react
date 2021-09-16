@@ -11,6 +11,8 @@
 
 .logo {
   display: flex;
+  text-decoration: none;
+  color: black;
   align-items: center;
   margin-left: 10px;
   font-family: 'Architects Daughter', cursive;
