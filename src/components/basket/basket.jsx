@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import BasketItem from "./basketItem";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 import { orderedProductsSelector, totalOrderPriceSelector } from '../../redux/features/order';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ function Basket({ products, totalOrderCost }) {
 
   return (
     <div className={style.basket}>
-      <i><FontAwesomeIcon icon={faShoppingBasket} /></i>
+      <i><FontAwesomeIcon icon={faShoppingBasket} />Your Order: </i>
       {
         products.map(product => {
           return <BasketItem key={product.id} product={product} />

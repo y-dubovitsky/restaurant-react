@@ -42,7 +42,6 @@ function Restaurants(
 
   return (
     <div className={style.restaurants}>
-      <Basket />
       <Navigation onRestaurantClick={setCurrentRestaurant} />
       <Restaurant id={currentRestaurantId || allRestaurants[0]?.id} />
     </div>

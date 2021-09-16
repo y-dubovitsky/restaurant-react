@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { MoneyContext } from '../../../context/money-context';
 import { increment, decrement, remove } from '../../../redux/features/order';
 
+import style from './basketItem.module.css';
+
 function BasketItem({ product, increment, decrement, remove }) {
 
   const { name, amount, price } = product;
@@ -11,13 +13,17 @@ function BasketItem({ product, increment, decrement, remove }) {
   if (amount === 0) return null; //TODO Так нормально?
 
   return (
-    <div>
-      <p>{name}</p>
-      <h3>Amount: {amount}</h3>
-      <h3>Total: {recalculatePrice(price * amount)}</h3>
-      <button onClick={decrement}>-</button>
-      <button onClick={increment}>+</button>
-      <button onClick={remove}>x</button>
+    <div className={style.basketItem}>
+      <div className={style.info}>
+        <h3>{name}</h3>
+      </div>
+      <div className={style.baksetOrder}>
+        <button onClick={increment}>+</button>
+        <p>{amount}</p>
+        <button onClick={decrement}>-</button>
+        <button onClick={remove}>x</button>
+        {/*TODO Можно добавить цену на конкретный товар */}
+      </div>
     </div>
   )
 }
