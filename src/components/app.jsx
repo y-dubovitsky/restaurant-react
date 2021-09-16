@@ -5,6 +5,7 @@ import Header from './header/header';
 import Hero from './hero/hero';
 import Restaurants from './restaurants';
 import Basket from './basket';
+import Card from './card/card';
 import { Route } from 'react-router-dom';
 
 export default class App extends Component {
@@ -16,6 +17,7 @@ export default class App extends Component {
         <Description />
         <Route path="/checkout" component={Basket} />
         <Route path="/restaurants" component={Restaurants} />
+        <Card />
         <Footer />
       </div>
     )
