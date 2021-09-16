@@ -26,7 +26,8 @@ function Restaurants(
     loadRestaurants,
     setCurrentRestaurant,
     loading,
-    loaded
+    loaded,
+    match
   }
 ) {
 
@@ -40,9 +41,11 @@ function Restaurants(
     return <Loader />;
   }
 
+  const { restId } = match;
+
   return (
     <div className={style.restaurants}>
-      <Navigation onRestaurantClick={setCurrentRestaurant} />
+      <Navigation onRestaurantClick={setCurrentRestaurant} restId={restId} />
       <Restaurant id={currentRestaurantId || allRestaurants[0]?.id} />
     </div>
   )

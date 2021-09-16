@@ -1,9 +1,16 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { restaurantListSelector } from '../../redux/selectors';
+import { Link } from 'react-router-dom';
 
 import style from './navigation.module.css';
 
-function Navigation({ restaurants, onRestaurantClick }) {
+function Navigation({ restaurants, onRestaurantClick, restId }) {
+
+  useEffect(() => {
+    onRestaurantClick(restId);
+  }, [restId]);
+
   return (
     <div className={style.navContainer}>
       <h1>Our Restaurants:</h1>
@@ -11,14 +18,15 @@ function Navigation({ restaurants, onRestaurantClick }) {
         {
           restaurants.map(restaurant => {
             return (
-              <div
-                className={style.nav}
+              <Link
                 key={restaurant.id}
-                onClick={() => onRestaurantClick(restaurant.id)}
+                className={style.nav}
                 style={{ backgroundImage: `url(${restaurant.image})` }}
+                onClick={() => onRestaurantClick(restaurant.id)}
+                to={`/restaurants/${restaurant.id}`}
               >
                 <h2>{restaurant.name}</h2>
-              </div>
+              </Link>
             );
           })
         }

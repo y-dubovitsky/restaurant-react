@@ -16,7 +16,7 @@ export default class App extends Component {
         <Hero />
         <Description />
         <Route path="/checkout" component={Basket} />
-        <Route path="/restaurants" component={Restaurants} />
+        <Route path="/restaurants/restId" component={Restaurants} />
         <Card />
         <Footer />
       </div>
