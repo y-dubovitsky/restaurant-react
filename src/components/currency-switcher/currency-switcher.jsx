@@ -10,6 +10,7 @@ export default function CurrencySwitcher() {
     <div className={style.currencySwitcher}>
       {currencyArr.map(currency => {
         return <h4
+          key={currency.name}
           className={currentCurrency === currency.name ? style.active : ''}
           onClick={() => setCurrentСurrency(currency.name)}
         >{currency.name}</h4>
