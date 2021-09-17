@@ -5,11 +5,7 @@ import { Link } from 'react-router-dom';
 
 import style from './navigation.module.css';
 
-function Navigation({ restaurants, onRestaurantClick, restId }) {
-
-  useEffect(() => {
-    onRestaurantClick(restId);
-  }, [restId]);
+function Navigation({ restaurants, onRestaurantClick }) {
 
   return (
     <div className={style.navContainer}>

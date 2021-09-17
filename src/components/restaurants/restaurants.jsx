@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../navigation';
 import Restaurant from './restaurant';
-import Basket from '../basket';
 import Loader from '../loader';
+import { Route, Switch, Redirect } from 'react-router-dom';
+
 
 import {
   restaurantListSelector,
@@ -15,7 +16,10 @@ import {
   loadRestaurants,
 } from '../../redux/actions/action';
 
-import { setCurrentRestaurant, currentRestaurantIdSelector } from '../../redux/features/currentRestaurant';
+import {
+  setCurrentRestaurant,
+  currentRestaurantIdSelector
+} from '../../redux/features/currentRestaurant';
 
 import style from './restaurants.module.css';
 
@@ -27,7 +31,6 @@ function Restaurants(
     setCurrentRestaurant,
     loading,
     loaded,
-    match
   }
 ) {
 
@@ -41,12 +44,21 @@ function Restaurants(
     return <Loader />;
   }
 
-  const { restId } = match;
-
   return (
     <div className={style.restaurants}>
-      <Navigation onRestaurantClick={setCurrentRestaurant} restId={restId} />
-      <Restaurant id={currentRestaurantId || allRestaurants[0]?.id} />
+      <Navigation onRestaurantClick={setCurrentRestaurant} />
+      <Switch>
+        <Route path={'/restaurants/:restId'}>
+          {
+            ({ match }) => {
+              currentRestaurantId = match.params.restId;
+              return <Restaurant id={currentRestaurantId} />
+            }
+          }
+        </Route>
+        <Redirect to={`/restaurants/${allRestaurants[0]?.id}`} />
+        <Route component={() => <h1>Select Restaurant</h1>} />
+      </Switch>
     </div>
   )
 }

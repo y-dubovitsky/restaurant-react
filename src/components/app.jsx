@@ -18,7 +18,7 @@ export default class App extends Component {
         <Switch>
           <Route path="/" exact component={() => <h1>Main Page</h1>} />
           <Route path="/checkout" component={Basket} />
-          <Route path="/restaurants/:restId" component={Restaurants} />
+          <Route path="/restaurants" component={Restaurants} />
           <Route path="/" component={() => <h1>Page NOT found</h1>} />
         </Switch>
         <Card />
