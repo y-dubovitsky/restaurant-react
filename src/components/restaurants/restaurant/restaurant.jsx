@@ -1,17 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link, NavLink, Route, Switch } from 'react-router-dom';
+import { loadCurrentRestaurantProducts } from '../../../redux/actions/action';
+import { currentRestaurantIdSelector } from '../../../redux/features/currentRestaurant';
+import {
+  averageRatingSelector,
+  restaurantByIdSelector
+} from '../../../redux/selectors';
 import Menu from '../../menu';
 import Rate from '../../rate';
 import Reviews from '../../reviews/reviews';
-
-import {
-  averageRatingSelector,
-  restaurantByIdSelector,
-} from '../../../redux/selectors';
-
-import { loadCurrentRestaurantProducts } from '../../../redux/actions/action';
-import { currentRestaurantIdSelector } from '../../../redux/features/currentRestaurant';
-
 import style from './restaurant.module.css';
 
 function Restaurant(
@@ -27,20 +25,35 @@ function Restaurant(
     loadCurrentRestaurantProducts(currentRestaurantId);
   }, [currentRestaurantId])
 
-  const [revToMenuSwitcher, setRevToMenuSwitcher] = useState(true);
   return (
     <div className={style.restaurant}>
       <h3>{restaurant.name}</h3>
       {!!averageRating && <Rate rating={averageRating} />}
       <div className={style.switcher}>
-        <button onClick={() => setRevToMenuSwitcher(true)}>Menu</button>
-        <button onClick={() => setRevToMenuSwitcher(false)}>Reviews</button>
+        <NavLink
+          to={`/restaurants/${restaurant.id}/menu`}
+          activeClassName={style.active}
+        >
+          Menu
+        </NavLink>
+        <NavLink
+          to={`/restaurants/${restaurant.id}/reviews`}
+          activeClassName={style.active}
+        >
+          Reviews
+        </NavLink>
       </div>
-      {revToMenuSwitcher ?
-        <Menu menu={restaurant.menu} />
-        :
-        <Reviews restaurantId={restaurant.id} />
-      }
+      <Switch>
+        <Route path='/restaurants/:restId/menu'>
+          <Menu menu={restaurant.menu} />
+        </Route>
+        <Route path='/restaurants/:restId/reviews'>
+          <Reviews restaurantId={restaurant.id} />
+        </Route>
+        <Route path='/restaurants/:restId'>
+          <Menu menu={restaurant.menu} />
+        </Route>
+      </Switch>
     </div>
   )
 }
