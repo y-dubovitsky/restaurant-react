@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../navigation';
-import Restaurant from './restaurant';
 import Loader from '../loader';
+import ErrorPage from '../error-page/error-page';
+import Restaurant from './restaurant';
 import { Route, Switch, Redirect } from 'react-router-dom';
-
 
 import {
   restaurantListSelector,
@@ -49,10 +49,16 @@ function Restaurants(
       <Navigation onRestaurantClick={setCurrentRestaurant} />
       <Switch>
         <Route path={'/restaurants/:restId'}>
+          {/* Роутинг функция, не уверен, что это хорошее решение! */}
           {
             ({ match }) => {
-              currentRestaurantId = match.params.restId;
-              return <Restaurant id={currentRestaurantId} />
+              const restId = match.params.restId;
+              const isRestExist = allRestaurants.find(restaurant => restaurant.id === restId);
+              if (isRestExist) {
+                currentRestaurantId = restId;
+                return <Restaurant id={currentRestaurantId} />
+              }
+              return <ErrorPage />
             }
           }
         </Route>

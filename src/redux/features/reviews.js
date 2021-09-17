@@ -1,5 +1,6 @@
 import requests from '../requests/requests';
 import { userByIdSelector } from './users';
+import { push } from 'connected-react-router';
 
 import {
   createAction,
@@ -35,8 +36,11 @@ export const addReview = createAction(
 
 export const loadReviews = createAsyncThunk(
   'reviews/load',
-  (restaurantId) => {
-    return requests.loadReviews(restaurantId);
+  (restaurantId, { dispatch }) => {
+    return requests.loadReviews(restaurantId).catch(error => {
+      dispatch(push('/error'));
+      throw error; //! Обязательно нужно выкидывать ошибку! Чтобы промис зареджектился
+    });
   }
 );
 

@@ -5,15 +5,17 @@ import './index.css';
 import App from './components/app';
 import store from './redux/store';
 import MoneyProvider from './context/money-context';
-import { BrowserRouter } from 'react-router-dom';
+import history from './history';
+import { ConnectedRouter } from 'connected-react-router'
+
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <MoneyProvider>
         <App restaurants />
       </MoneyProvider>
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );

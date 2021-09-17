@@ -7,6 +7,7 @@ import Restaurants from './restaurants';
 import Basket from './basket';
 import Card from './card/card';
 import { Route, Switch } from 'react-router-dom';
+import ErrorPage from './error-page/error-page';
 
 export default class App extends Component {
   render() {
@@ -19,7 +20,7 @@ export default class App extends Component {
           <Route path="/" exact component={() => <h1>Main Page</h1>} />
           <Route path="/checkout" component={Basket} />
           <Route path="/restaurants" component={Restaurants} />
-          <Route path="/" component={() => <h1>Page NOT found</h1>} />
+          <Route path="/error" component={ErrorPage} />
         </Switch>
         <Card />
         <Footer />
