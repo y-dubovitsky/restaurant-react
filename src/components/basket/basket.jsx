@@ -1,16 +1,37 @@
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MoneyContext } from '../../context/money-context';
-import { makeOrder, orderedProductsSelector, orderList, totalOrderPriceSelector } from '../../redux/features/order';
+import { STATUS } from '../../redux/constants/constants';
+import {
+  makeOrder,
+  orderedProductsSelector,
+  orderList,
+  totalOrderPriceSelector,
+  orderResponseStatus
+} from '../../redux/features/order';
 import style from './basket.module.css';
 import BasketItem from "./basketItem";
 
-function Basket({ products, totalOrderCost, makeOrder, orderList }) {
+function Basket({ products, totalOrderCost, makeOrder, orderList, status }) {
 
+  const [isDisabled, setIsDisabled] = useState(false);
   const { recalculatePrice } = useContext(MoneyContext);
+
+  useEffect(() => {
+    switch (status) {
+      case STATUS.loading: {
+        setIsDisabled(true);
+        break;
+      }
+      case STATUS.loaded: {
+        setIsDisabled(false);
+        break;
+      }
+    }
+  }, [status]);
 
   return (
     <div className={style.basket}>
@@ -22,7 +43,7 @@ function Basket({ products, totalOrderCost, makeOrder, orderList }) {
       }
       <h3>Total Cost: {recalculatePrice(totalOrderCost)}</h3>
       <Link to="/checkout">
-        <button onClick={() => makeOrder(orderList)}>Checkout</button>
+        <button disabled={isDisabled ? 'disabled' : ''} onClick={() => makeOrder(orderList)}>Checkout</button>
       </Link>
     </div>
   )
@@ -34,7 +55,8 @@ const mapStateToProps = (state) => {
   return {
     orderList: orderList(state),
     products: orderedProductsSelector(state),
-    totalOrderCost: totalOrderPriceSelector(state)
+    totalOrderCost: totalOrderPriceSelector(state),
+    status: orderResponseStatus(state),
   }
 }
 

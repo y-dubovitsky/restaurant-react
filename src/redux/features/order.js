@@ -1,8 +1,5 @@
-import { createSelector, createAsyncThunk } from '@reduxjs/toolkit';
-import {
-  createSlice
-} from '@reduxjs/toolkit';
-import produce from 'immer';
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
+import { STATUS } from '../constants/constants';
 import requests from '../requests/requests';
 import { productMap } from '../selectors';
 
@@ -18,6 +15,7 @@ export const makeOrder = createAsyncThunk(
 
 const initState = {
   entities: {},
+  status: STATUS.empty, //TODO Вынести в serverResponse
   serverResponse: {}
 }
 
@@ -57,6 +55,7 @@ const { reducer, actions } = createSlice({
     [makeOrder.pending.type]: (state) => {
       return {
         ...state,
+        status: STATUS.loading,
         serverResponse: {
           ...state.serverResponse,
           error: null
@@ -65,15 +64,16 @@ const { reducer, actions } = createSlice({
     },
     [makeOrder.fulfilled.type]: (state, action) => {
       const { payload } = action;
-      console.log(payload);
       return {
         ...state,
+        status: STATUS.loaded,
         serverResponse: payload
       }
     },
     [makeOrder.rejected.type]: (state, action) => {
       return {
         ...state,
+        status: STATUS.error,
         serverResponse: {
           ...state.serverResponse,
           error: null
@@ -92,6 +92,8 @@ export { increment, decrement, remove };
 const order = state => state.order;
 
 export const orderList = state => order(state).entities;
+
+export const orderResponseStatus = state => order(state).status;
 
 //TODO Оптимизировать этот метод!
 export const orderedProductsSelector = createSelector(
