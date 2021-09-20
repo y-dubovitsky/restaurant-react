@@ -19,6 +19,16 @@ export const restaurantListSelector = createSelector([restaurantsMap], (restaura
   return Object.values(restaurantsMap);
 });
 
+//FIXME Сделать более красивым
+export const restaurantByProductId = (state, { product }) => {
+  const result = restaurantListSelector(state).filter(rest => {
+    const menu = rest.menu.find(menu => menu === product.id);
+    if (menu) return rest;
+  });
+
+  return result[0];
+}
+
 export const restaurantByIdSelector = ((state, { id }) => {
   return restaurantsMap(state)[id];
 });
