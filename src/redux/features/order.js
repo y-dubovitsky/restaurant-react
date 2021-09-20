@@ -1,33 +1,85 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   createSlice
 } from '@reduxjs/toolkit';
-
+import produce from 'immer';
+import requests from '../requests/requests';
 import { productMap } from '../selectors';
 
+export const makeOrder = createAsyncThunk(
+  'order/make',
+  (order) => {
+    const data = requests.makeOrder(order);
+    return data;
+  }
+);
+
 // ----------------------------------- Slice (reducer + actions) -----------------------------------
+
+const initState = {
+  entities: {},
+  serverResponse: {}
+}
+
 const { reducer, actions } = createSlice({
   name: 'order',
-  initialState: {},
+  initialState: initState,
   reducers: {
     increment: (state, { payload: id }) => {
       return {
         ...state,
-        [id]: (state[id] || 0) + 1
+        entities: {
+          ...state.entities,
+          [id]: (state.entities[id] || 0) + 1
+        }
       }
     },
     decrement: (state, { payload: id }) => {
       return {
         ...state,
-        [id]: state[id] > 0 ? state[id] - 1 : 0
+        entities: {
+          ...state.entities,
+          [id]: state.entities[id] > 0 ? state.entities[id] - 1 : 0
+        }
       }
     },
     remove: (state, { payload: id }) => {
       return {
         ...state,
-        [id]: 0
+        entities: {
+          ...state.entities,
+          [id]: 0
+        }
       }
     },
+  },
+  extraReducers: {
+    [makeOrder.pending.type]: (state) => {
+      return {
+        ...state,
+        serverResponse: {
+          ...state.serverResponse,
+          error: null
+        }
+      }
+    },
+    [makeOrder.fulfilled.type]: (state, action) => {
+      const { payload } = action;
+      console.log(payload);
+      return {
+        ...state,
+        serverResponse: payload
+      }
+    },
+    [makeOrder.rejected.type]: (state, action) => {
+      return {
+        ...state,
+        serverResponse: {
+          ...state.serverResponse,
+          error: null
+        }
+      }
+    }
   }
 });
 
@@ -39,10 +91,12 @@ export { increment, decrement, remove };
 // ----------------------------------- Selectors -----------------------------------
 const order = state => state.order;
 
+export const orderList = state => order(state).entities;
+
 //TODO Оптимизировать этот метод!
 export const orderedProductsSelector = createSelector(
   // Массив значений, от которых зависит, будет ли пересчитываться функция
-  [productMap, order],
+  [productMap, orderList],
   (products, order) => {
     const orderIds = Object.keys(order);
     const productArray = Object.keys(products).map(key => products[key]);
@@ -59,5 +113,5 @@ export const totalOrderPriceSelector = createSelector([orderedProductsSelector],
 });
 
 export const orderProductAmountSelector = (state, props) => {
-  return order(state)[props.id];
+  return orderList(state)[props.id];
 }

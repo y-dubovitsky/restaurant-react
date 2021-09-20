@@ -1,16 +1,14 @@
-import { connect } from 'react-redux';
-import BasketItem from "./basketItem";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
-import { orderedProductsSelector, totalOrderPriceSelector } from '../../redux/features/order';
-import { Link } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useContext } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { MoneyContext } from '../../context/money-context';
-
+import { makeOrder, orderedProductsSelector, orderList, totalOrderPriceSelector } from '../../redux/features/order';
 import style from './basket.module.css';
+import BasketItem from "./basketItem";
 
-function Basket({ products, totalOrderCost }) {
+function Basket({ products, totalOrderCost, makeOrder, orderList }) {
 
   const { recalculatePrice } = useContext(MoneyContext);
 
@@ -24,7 +22,7 @@ function Basket({ products, totalOrderCost }) {
       }
       <h3>Total Cost: {recalculatePrice(totalOrderCost)}</h3>
       <Link to="/checkout">
-        <button>Checkout</button>
+        <button onClick={() => makeOrder(orderList)}>Checkout</button>
       </Link>
     </div>
   )
@@ -34,9 +32,10 @@ function Basket({ products, totalOrderCost }) {
 const mapStateToProps = (state) => {
 
   return {
+    orderList: orderList(state),
     products: orderedProductsSelector(state),
     totalOrderCost: totalOrderPriceSelector(state)
   }
 }
 
-export default connect(mapStateToProps)(Basket);
+export default connect(mapStateToProps, { makeOrder })(Basket);
