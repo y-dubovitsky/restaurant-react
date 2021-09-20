@@ -66,6 +66,7 @@ const { reducer, actions } = createSlice({
       const { payload } = action;
       return {
         ...state,
+        entities: {}, // При удачном ответе от сервера, очищается корзина!
         status: STATUS.loaded,
         serverResponse: payload
       }
@@ -83,10 +84,10 @@ const { reducer, actions } = createSlice({
   }
 });
 
-const { increment, decrement, remove } = actions;
+const { increment, decrement, remove, clearOrder } = actions;
 
 export default reducer;
-export { increment, decrement, remove };
+export { increment, decrement, remove, clearOrder };
 
 // ----------------------------------- Selectors -----------------------------------
 const order = state => state.order;

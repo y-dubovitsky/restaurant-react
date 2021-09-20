@@ -9,13 +9,15 @@ import {
   makeOrder,
   orderedProductsSelector,
   orderList,
+  clearOrder,
   totalOrderPriceSelector,
   orderResponseStatus
 } from '../../redux/features/order';
 import style from './basket.module.css';
 import BasketItem from "./basketItem";
+import { Switch, Redirect } from 'react-router-dom';
 
-function Basket({ products, totalOrderCost, makeOrder, orderList, status }) {
+function Basket({ products, totalOrderCost, makeOrder, orderList, status, clearOrder }) {
 
   const [isDisabled, setIsDisabled] = useState(false);
   const { recalculatePrice } = useContext(MoneyContext);
@@ -45,6 +47,14 @@ function Basket({ products, totalOrderCost, makeOrder, orderList, status }) {
       <Link to="/checkout">
         <button disabled={isDisabled ? 'disabled' : ''} onClick={() => makeOrder(orderList)}>Checkout</button>
       </Link>
+      {
+        isDisabled ?
+          <Switch>
+            <Redirect to={`/restaurants`} />
+          </Switch>
+          :
+          ''
+      }
     </div>
   )
 }
@@ -60,4 +70,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { makeOrder })(Basket);
+export default connect(mapStateToProps, { makeOrder, clearOrder })(Basket);
