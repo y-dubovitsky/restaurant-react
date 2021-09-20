@@ -34,4 +34,8 @@ router.get('/users', (req, res, next) => {
   reply(res, users);
 });
 
+router.post('/order', (req, res, next) => {
+  reply(res, { response: 'Thanx, for the order!' });
+});
+
 module.exports = router;
