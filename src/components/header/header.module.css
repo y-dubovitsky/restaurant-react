@@ -41,3 +41,12 @@ ul {
 ul li {
   margin: 0 20px;
 }
+
+ul li:hover {
+  color: silver;
+}
+
+.checkout i {
+  color: black;
+  font-size: 1rem;
+}
