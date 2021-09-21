@@ -50,6 +50,16 @@
   border-bottom: 1px solid silver;
 }
 
+.up {
+  text-decoration: none;
+  list-style: none;
+  color: black;
+}
+
+.up li:hover {
+  text-shadow: 1px 1px 1px black;
+}
+
 ul {
   display: flex;
   list-style: none;

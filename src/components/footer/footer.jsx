@@ -3,9 +3,10 @@ import {
   faFacebookSquare,
   faInstagramSquare,
   faVk,
-  faTwitterSquare
+  faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons";
 import { NavLink } from 'react-router-dom';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 import style from './footer.module.css';
 
@@ -13,7 +14,7 @@ export default function Footer() {
   return (
     <div className={style.footer}>
       <a className={style.up} href="#hero">
-        Up
+        <li>Up<i><FontAwesomeIcon icon={faArrowUp} /></i></li>
       </a>
       <div className={style.desContainer}>
         <div className={style.description}>

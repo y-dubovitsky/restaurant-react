@@ -34,7 +34,7 @@
 }
 
 .switcher a:hover {
-  background-color: black;
+  background-color: silver;
   color: white;
 }
 
@@ -43,5 +43,6 @@
 }
 
 .active {
-  background-color: rgb(19, 199, 19) !important;
+  background-color: black !important;
+  color: white !important;
 }
