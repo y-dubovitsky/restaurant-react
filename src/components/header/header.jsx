@@ -21,13 +21,41 @@ function Header({ totalOrderCost }) {
       <CurrencySwitcher />
       <div className={style.menu}>
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contacts</li>
-          <li>FAQ</li>
           <li>
-            <NavLink to='/checkout' className={style.checkout}>
-              <i><FontAwesomeIcon icon={faShoppingBasket} />{recalculatePrice(totalOrderCost)}</i>
+            <NavLink to="/restaurants"
+              activeClassName={style.active}
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/about"
+              activeClassName={style.active}
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/contacts"
+              activeClassName={style.active}
+            >
+              Contacts
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/faq"
+              activeClassName={style.active}
+            >
+              FAQ
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to='/checkout'
+              className={style.checkout}
+              activeClassName={style.active}
+            >
+              <FontAwesomeIcon icon={faShoppingBasket} />{recalculatePrice(totalOrderCost)}
             </NavLink>
           </li>
         </ul>

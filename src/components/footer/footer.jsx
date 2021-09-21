@@ -5,6 +5,7 @@ import {
   faVk,
   faTwitterSquare
 } from "@fortawesome/free-brands-svg-icons";
+import { NavLink } from 'react-router-dom';
 
 import style from './footer.module.css';
 
@@ -17,15 +18,38 @@ export default function Footer() {
       <div className={style.desContainer}>
         <div className={style.description}>
           <div className={style.logo}>
-            <img src={process.env.PUBLIC_URL + '/logo100_120.png'} alt=""/>
+            <img src={process.env.PUBLIC_URL + '/logo100_120.png'} alt="" />
             <h3>Consegna del cibo</h3>
           </div>
           <ul>
-            <li>Для ресторанов</li>
-            <li>Курьерам</li>
-            <li>Пресс-центр</li>
-            <li>Условия акций</li>
-            <li>Контакты</li>
+            <li>
+              <NavLink to="/restaurants"
+                activeClassName={style.active}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/about"
+                activeClassName={style.active}
+              >
+                About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/contacts"
+                activeClassName={style.active}
+              >
+                Contacts
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/faq"
+                activeClassName={style.active}
+              >
+                FAQ
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div className={style.social}>

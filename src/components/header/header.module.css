@@ -46,7 +46,17 @@ ul li:hover {
   color: silver;
 }
 
+ul li a {
+  text-decoration: none;
+  color: black;
+}
+
 .checkout i {
   color: black;
   font-size: 1rem;
+}
+
+.active {
+  text-decoration: underline black;
+  font-weight: bold;
 }
