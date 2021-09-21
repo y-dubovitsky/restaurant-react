@@ -11,6 +11,7 @@ import ErrorPage from './error-page/error-page';
 import OrderStatus from './order-status/order-status';
 import Contacts from './contacts/contacts';
 import FAQ from './faq/faq';
+import About from './about/about';
 
 export default class App extends Component {
   render() {
@@ -23,7 +24,7 @@ export default class App extends Component {
           <Redirect exact from="/" to="/restaurants" />
           <Route path="/checkout" component={Basket} />
           <Route path="/contacts" component={Contacts} />
-          <Route path="/about" component={Contacts} />
+          <Route path="/about" component={About} />
           <Route path="/faq" component={FAQ} />
           <Route path="/restaurants" component={Restaurants} />
           <Route path="/order-status" component={OrderStatus} />
