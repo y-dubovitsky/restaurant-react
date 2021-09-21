@@ -4,6 +4,7 @@ import Rate from '../../rate';
 import { addReview } from '../../../redux/features/reviews';
 
 import style from './review-form.module.css';
+import ValidationPopUp from "../../validation-pop-up/validation-pop-up";
 
 const INIT_FORM_STATE = {
   name: '',
@@ -14,6 +15,7 @@ const INIT_FORM_STATE = {
 function ReviewForm({ handleSubmit }) {
 
   const [formValues, setFormValues] = useState(INIT_FORM_STATE);
+  const [isFormValid, setIsFormValid] = useState(true);
 
   //TODO Вынести в свой собственный ХУК
   const handleInputChange = (event) => {
@@ -40,33 +42,48 @@ function ReviewForm({ handleSubmit }) {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    handleSubmit(formValues);
+    if (validateFormValues(formValues)) {
+      handleSubmit(formValues)
+    }
     //TODO Добавить способ обнуления значений формы!
   }
 
+  const validateFormValues = () => {
+    if (formValues.name === '' || formValues.text === '') {
+      setIsFormValid(false);
+      setTimeout(() => {
+        setIsFormValid(true);
+      }, 3000);
+      return false;
+    }
+    return true;
+  }
 
   return (
-    <div className={style.reviewForm}>
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="user">User</label>
-        <input
-          type="text"
-          name="name"
-          placeholder="insert username"
-          onChange={handleInputChange}
-        />
-        <label htmlFor="review">Review</label>
-        <textarea
-          name="text"
-          placeholder="review"
-          onChange={handleInputChange}
-        />
-        <div>
-          <Rate handleRateChange={handleRateChange} />
-        </div>
-        <button>Add review</button>
-      </form>
-    </div>
+    <>
+      {isFormValid ? '' : <ValidationPopUp />}
+      <div div className={style.reviewForm} >
+        <form onSubmit={handleFormSubmit}>
+          <label htmlFor="user">User</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="insert username"
+            onChange={handleInputChange}
+          />
+          <label htmlFor="review">Review</label>
+          <textarea
+            name="text"
+            placeholder="review"
+            onChange={handleInputChange}
+          />
+          <div>
+            <Rate handleRateChange={handleRateChange} />
+          </div>
+          <button>Add review</button>
+        </form>
+      </div>
+    </>
   )
 }
 
