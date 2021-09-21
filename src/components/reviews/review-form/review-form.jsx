@@ -53,7 +53,7 @@ function ReviewForm({ handleSubmit }) {
       setIsFormValid(false);
       setTimeout(() => {
         setIsFormValid(true);
-      }, 3000);
+      }, 5000);
       return false;
     }
     return true;
@@ -61,7 +61,7 @@ function ReviewForm({ handleSubmit }) {
 
   return (
     <>
-      {isFormValid ? '' : <ValidationPopUp />}
+      {isFormValid ? '' : <ValidationPopUp message={'Invalid Form Data'} />}
       <div div className={style.reviewForm} >
         <form onSubmit={handleFormSubmit}>
           <label htmlFor="user">User</label>
