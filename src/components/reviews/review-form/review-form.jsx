@@ -8,7 +8,7 @@ import style from './review-form.module.css';
 const INIT_FORM_STATE = {
   name: '',
   text: '',
-  rating: 3
+  rating: ''
 };
 
 function ReviewForm({ handleSubmit }) {
@@ -29,11 +29,21 @@ function ReviewForm({ handleSubmit }) {
     )
   }
 
+  const handleRateChange = (idx) => {
+    setFormValues(
+      {
+        ...formValues,
+        rating: idx
+      }
+    )
+  }
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
     handleSubmit(formValues);
     //TODO Добавить способ обнуления значений формы!
   }
+
 
   return (
     <div className={style.reviewForm}>
@@ -52,8 +62,7 @@ function ReviewForm({ handleSubmit }) {
           onChange={handleInputChange}
         />
         <div>
-          {/* //TODO Добавить рейтинг */}
-          <Rate />
+          <Rate handleRateChange={handleRateChange} />
         </div>
         <button>Add review</button>
       </form>
