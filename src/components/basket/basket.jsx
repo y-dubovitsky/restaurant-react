@@ -15,7 +15,7 @@ import {
 } from '../../redux/features/order';
 import style from './basket.module.css';
 import BasketItem from "./basketItem";
-import { Switch, Redirect } from 'react-router-dom';
+import Loader from '../loader';
 
 function Basket({ products, totalOrderCost, makeOrder, orderList, status, clearOrder }) {
 
@@ -35,6 +35,8 @@ function Basket({ products, totalOrderCost, makeOrder, orderList, status, clearO
     }
   }, [status]);
 
+  if (!STATUS.loaded) return <Loader />;
+
   return (
     <div className={style.basket}>
       <i><FontAwesomeIcon icon={faShoppingBasket} />Your Order: </i>
@@ -44,17 +46,9 @@ function Basket({ products, totalOrderCost, makeOrder, orderList, status, clearO
         })
       }
       <h3>Total Cost: {recalculatePrice(totalOrderCost)}</h3>
-      <Link to="/checkout">
+      <Link to="/order-status">
         <button disabled={isDisabled ? 'disabled' : ''} onClick={() => makeOrder(orderList)}>Checkout</button>
       </Link>
-      {
-        isDisabled ?
-          <Switch>
-            <Redirect to={`/restaurants`} />
-          </Switch>
-          :
-          ''
-      }
     </div>
   )
 }

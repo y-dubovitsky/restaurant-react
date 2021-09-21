@@ -6,8 +6,9 @@ import Hero from './hero/hero';
 import Restaurants from './restaurants';
 import Basket from './basket';
 import Card from './card/card';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import ErrorPage from './error-page/error-page';
+import OrderStatus from './order-status/order-status';
 
 export default class App extends Component {
   render() {
@@ -17,9 +18,10 @@ export default class App extends Component {
         <Hero />
         <Description />
         <Switch>
-          <Route path="/" exact component={() => <h1>Main Page</h1>} />
+          <Redirect exact from="/" to="/restaurants" />
           <Route path="/checkout" component={Basket} />
           <Route path="/restaurants" component={Restaurants} />
+          <Route path="/order-status" component={OrderStatus}/>
           <Route path="/error" component={ErrorPage} />
         </Switch>
         <Card />
