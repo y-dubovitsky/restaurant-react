@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <div className={style.footer}>
       <a className={style.up} href="#hero">
-        Наверх
+        Up
       </a>
       <div className={style.desContainer}>
         <div className={style.description}>
@@ -62,7 +62,7 @@ export default function Footer() {
         </div>
       </div>
       <div className={style.down}>
-        © 2000–{new Date().getFullYear()}, ООО «Consegna del cibo», официальный сайт
+        © 2000–{new Date().getFullYear()}, ООО «Consegna del cibo», official site
       </div>
     </div>
   )
